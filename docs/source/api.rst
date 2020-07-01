@@ -14,3 +14,9 @@ General FFTLog module
 ---------------------
 
 .. autofunction:: hankl.FFTLog
+
+
+.. toctree::
+   :maxdepth: 4
+   :caption: Contents:
+   :hidden:

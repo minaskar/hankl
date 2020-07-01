@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-.. title:: hankl documentation
+.. title:: hankl
 
 
 Welcome to hankl's documentation!
@@ -14,31 +14,17 @@ Welcome to hankl's documentation!
 
 
 
-Basic usage
-===========
-
-For instance, if you wanted to draw samples from a 10-dimensional Gaussian, you would do something like::
-
-    import numpy as np
-    import zeus
-
-
-Installation
-============
-
-To install **hankl** using pip run::
-
-    pip install hankl
-
-
 Getting Started
 ===============
+- See the :doc:`install` page for instruction on how to easily install hankl.
 - See the :doc:`api` page for detailed User Manual and API documentation.
+- See the :doc:`example` page for a simple example.
+
 
 
 Attribution
 ===========
-- hhh
+- Please cite X if you find this code useful in your research.
 
 
 Licence
@@ -58,8 +44,10 @@ Changelog
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
    :caption: Contents:
    :hidden:
 
+   install
    api
+   example
