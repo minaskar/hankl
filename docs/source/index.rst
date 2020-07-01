@@ -7,7 +7,7 @@
 
 .. figure:: ./../../logo.png
 
-*hankl is a lightweight Python implementation of the FFTLog algorithm for Cosmology*
+**hankl is a lightweight Python implementation of the FFTLog algorithm for Cosmology**
 
 .. image:: https://img.shields.io/badge/License-GPLv3-blue.svg
     :target: https://github.com/minaskar/zeus/blob/master/LICENSE
