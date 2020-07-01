@@ -6,10 +6,10 @@ def P2xi(k, P, l, n=0, lowring=False):
     r'''
     Hankel Transform Power Spectrum Multipole to Correlation Function Multipole.
 
-    \xi_{l}^{(n)}(r) = i^{l} \int_{0}^{\infty} k^{2} dk / (2 \pi^{2}) (kr)^{-n} P_{l}^{(n)}(k) j_{l}(ks)
+    .. math:: \xi_{l}^{(n)}(r) = i^{l} \int_{0}^{\infty} k^{2} dk / (2 \pi^{2}) (kr)^{-n} P_{l}^{(n)}(k) j_{l}(ks)
 
     Args:
-        k (array): Array of log-separated wavenumbers.
+        k (array): Array of uniformly logarithmically spaced wavenumbers.
         P (array): Array of respective Power Spectrum values.
         l (int): Degree of Power Spectrum multipole.
         n (int): Order of expansion (Default is 0, plane-parallel).
@@ -25,10 +25,10 @@ def xi2P(r, xi, l, n=0, lowring=False):
     r'''
     Hankel Transform Correlation Function Multipole to Power Spectrum Multipole.
 
-    P_{l}^{(n)}(k) = 4 \pi (-i)^{l} \int_{0}^{\infty} r^{2} dr (kr)^{n} \xi_{l}^{(n)}(r) j_{l}(kr)
+    .. math:: P_{l}^{(n)}(k) = 4 \pi (-i)^{l} \int_{0}^{\infty} r^{2} dr (kr)^{n} \xi_{l}^{(n)}(r) j_{l}(kr)
 
     Args:
-        r (array): Array of log-separated separations.
+        r (array): Array of uniformly logarithmically spaced separations.
         xi (array): Array of respective two point correlation function values.
         l (int): Degree of Power Spectrum multipole.
         n (int): Order of expansion (Default is 0, plane-parallel).

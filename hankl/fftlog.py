@@ -1,36 +1,43 @@
 import numpy as np
-from numpy.fft import fft, ifft , fftshift, ifftshift , rfft, irfft
-from numpy import exp, log, log10, cos, sin, pi
-from scipy.special import loggamma, gamma
-from time import time
-from numpy import gradient as grad
-import sys
-
-log2 = log(2)
-cut = 200
+from scipy.special import gamma
 
 
-def g_m_vals(mu, q):
-	imag_q = np.imag(q)
+def _gamma_term(mu, x, cut=200.0):
+	r'''
+	Compute the following term:
+	
+		\Gamma[(\mu + 1 + x) / 2] / \Gamma[(\mu + 1 - x) / 2]
 
-	g_m = np.zeros(q.size, dtype=complex)
+	(see eq.16 in https://jila.colorado.edu/~ajsh/FFTLog/)
 
-	asym_q = q[np.absolute(imag_q) > cut]
-	asym_plus = (mu+1+asym_q)/2.
-	asym_minus = (mu+1-asym_q)/2.
+	Args:
+		mu (float): Index of J_mu in Hankel transform; mu may be any real number, positive or negative.
+		x ():
+		cut (float): Cuttoff value to switch to Gamma function limiting case.
+	Returns:
+		Gamma fraction term of eq. 16
+	'''
 
-	q_good = q[(np.absolute(imag_q) <= cut) & (q != mu + 1 + 0.0j)]
+	imag_x = np.imag(x)
 
-	alpha_plus = (mu+1+q_good)/2.
-	alpha_minus = (mu+1-q_good)/2.
+	g_m = np.zeros(x.size, dtype=complex)
 
-	g_m[(np.absolute(imag_q) <= cut) & (q != mu + 1 + 0.0j)] = gamma(alpha_plus)/gamma(alpha_minus)
+	asym_x = x[np.absolute(imag_x) > cut]
+	asym_plus = (mu+1+asym_x)/2.
+	asym_minus = (mu+1-asym_x)/2.
+
+	x_good = x[(np.absolute(imag_x) <= cut) & (x != mu + 1 + 0.0j)]
+
+	alpha_plus = (mu+1+x_good)/2.
+	alpha_minus = (mu+1-x_good)/2.
+
+	g_m[(np.absolute(imag_x) <= cut) & (x != mu + 1 + 0.0j)] = gamma(alpha_plus)/gamma(alpha_minus)
 
 	# high-order expansion
-	g_m[np.absolute(imag_q) > cut] = exp((asym_plus-0.5)*log(asym_plus) - (asym_minus-0.5)*log(asym_minus) - asym_q
+	g_m[np.absolute(imag_x) > cut] = np.exp((asym_plus-0.5)*np.log(asym_plus) - (asym_minus-0.5)*np.log(asym_minus) - asym_x
                                       + 1./12 * (1./asym_plus - 1./asym_minus) + 1./360.*(1./asym_minus**3 - 1./asym_plus**3) + 1./1260*(1./asym_plus**5 - 1./asym_minus**5))
 
-	g_m[np.where(q == mu+1+0.0j)[0]] = 0.+0.0j
+	g_m[np.where(x == mu+1+0.0j)[0]] = 0.+0.0j
 
 	return g_m
 
@@ -39,7 +46,7 @@ def _lowring_kr(mu, q, L, N, kr=1.0):
 	r'''
 	Compute kr so that 
 
-		(k r)^{- i pi/dlnr} U_{\mu}(q + i pi/dlnr)
+		(k r)^{- i \pi/dlnr} U_{\mu}(q + i \pi/dlnr)
 
 	is real thus reducing lowringing of the Hankel Transform.
 
@@ -55,35 +62,51 @@ def _lowring_kr(mu, q, L, N, kr=1.0):
 
 	delta_L = L/float(N)
 
-	x = q + 1j*pi/delta_L
+	x = q + 1j*np.pi/delta_L
 
 	x_plus = (mu+1+x)/2.
 	x_minus = (mu+1-x)/2.
 
-	phip = np.imag(loggamma(x_plus))
-	phim = np.imag(loggamma(x_minus))
+	phip = np.imag(np.log(gamma(x_plus)))
+	phim = np.imag(np.log(gamma(x_minus)))
 
-	arg = log(2.0/kr)/delta_L + (phip - phim)/pi
+	arg = np.log(2.0/kr)/delta_L + (phip - phim)/np.pi
 	iarg = np.rint(arg)
 	if (arg != iarg):
-		kr = kr*exp((arg-iarg)*delta_L)
+		kr = kr*np.exp((arg-iarg)*delta_L)
 
 	return kr
 
 
-def u_m_vals(m, mu, q, kr, L):
+def _u_m_term(m, mu, q, kr, L):
+	r'''
+	Compute u_{m}(\mu, q) term defined as
 
-    omega = 1j*2*pi*m/L
+		u_{m}(\mu, q) = (k_{0}r_{0})^{-2\pi i m / L} U_{\mu}(q + 2\pi i m/ L)
 
-    x = q + omega
+	(see eq.18 in https://jila.colorado.edu/~ajsh/FFTLog/)
 
-    U_mu = 2**x*g_m_vals(mu, x)
+	Args:
+		m ():
+		mu ():
+		q ():
+		kr (float):
+		L (float):
+	Returns:
+		u_{m}(\mu, q) (float) : fd
+	'''
 
-    u_m = (kr)**(-omega)*U_mu
+	omega = 1j*2*np.pi*m/float(L)
 
-    u_m[m.size-1] = np.real(u_m[m.size-1])
+	x = q + omega
 
-    return u_m
+	U_mu = 2**x*_gamma_term(mu, x)
+
+	u_m = (kr)**(-omega)*U_mu
+
+	u_m[m.size-1] = np.real(u_m[m.size-1])
+
+	return u_m
 
 
 def FFTLog(k, f_k, q, mu, kr=1.0, lowring=False):
@@ -92,14 +115,9 @@ def FFTLog(k, f_k, q, mu, kr=1.0, lowring=False):
 
 	Defined as:
 
-	F(k)= \int_0^\infty f(r) (kr)^q J_\mu(kr) k dr 
-	f(r)= \int_0^\infty F(k) (kr)^{-q} J_\mu(kr) r dk
+	.. math:: F(k)= \int_0^\infty f(r) (kr)^q J_\mu(kr) k dr 
 
-	References
-		[1] J. D. Talman. Numerical Fourier and Bessel Transforms in Logarithmic Variables.
-            Journal of Computational Physics, 29:35-48, October 1978.
-		[2] A. J. S. Hamilton. Uncorrelated modes of the non-linear power spectrum.
-            MNRAS, 312:257-284, February 2000.
+	.. math:: f(r)= \int_0^\infty F(k) (kr)^{-q} J_\mu(kr) r dk
 
 	Args:
 		k (array):
@@ -109,27 +127,32 @@ def FFTLog(k, f_k, q, mu, kr=1.0, lowring=False):
 		kr (float): Input value of kr (Default is 1).
 		lowring (bool): If True, then use low-ringing value of kr closest to input value of kr.
 	Returns:
-		r (array):
-		A (array):
+		r (array): x
+		A (array): x
+
+	References:
+		[1] J. D. Talman. Numerical Fourier and Bessel Transforms in Logarithmic Variables. Journal of Computational Physics, 29:35-48, October 1978.
+		
+		[2] A. J. S. Hamilton. Uncorrelated modes of the non-linear power spectrum. MNRAS, 312:257-284, February 2000.
 	'''
 
 	N = f_k.size
-	delta_L = (log(np.max(k))-log(np.min(k)))/float(N-1)
-	L = (log(np.max(k))-log(np.min(k)))
+	delta_L = (np.log(np.max(k))-np.log(np.min(k)))/float(N-1)
+	L = (np.log(np.max(k))-np.log(np.min(k)))
 
 
-	log_k0 = log(k[N//2])
-	k0 = exp(log_k0)
+	log_k0 = np.log(k[N//2])
+	k0 = np.exp(log_k0)
 
 	# Fourier transform input data and get m values, shifted so the zero point is at the center
 
-	c_m = rfft(f_k)
+	c_m = np.fft.rfft(f_k)
 	m = np.fft.rfftfreq(N, d=1.)*float(N)
 	# make r vector
 	if lowring:
 		kr = _lowring_kr(mu, q, L, N, kr)
 	r0 = kr/k0
-	log_r0 = log(r0)
+	log_r0 = np.log(r0)
 
 	m = np.fft.rfftfreq(N, d=1.)*float(N)
 	m_r = np.arange(-N//2, N//2)
@@ -138,13 +161,13 @@ def FFTLog(k, f_k, q, mu, kr=1.0, lowring=False):
 	#s-array
 	s = delta_L*(-m_r)+log_r0
 	id = m_shift
-	r = 10**(s[id]/log(10))
+	r = 10**(s[id]/np.log(10))
 
-	u_m = u_m_vals(m, mu, q, kr, L)
+	u_m = _u_m_term(m, mu, q, kr, L)
 
 	b = c_m*u_m
 
-	A_m = irfft(b)
+	A_m = np.fft.irfft(b)
 
 	A = A_m[id]
 
