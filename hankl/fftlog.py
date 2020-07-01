@@ -87,13 +87,13 @@ def _u_m_term(m, mu, q, kr, L):
 	(see eq.18 in https://jila.colorado.edu/~ajsh/FFTLog/)
 
 	Args:
-		m ():
-		mu ():
-		q ():
-		kr (float):
-		L (float):
+		m (float): Index of u_{m} term.
+		mu (float): Index of J_mu in Hankel transform; mu may be any real number, positive or negative.
+		q (float):  Exponent of power law bias; q may be any real number, positive or negative.
+		kr (float): Value of kr.
+		L (float): Range of uniformly logarithmically spaced points.
 	Returns:
-		u_{m}(\mu, q) (float) : fd
+		u_{m}(\mu, q) (float) : u_{m} term of eq. 18
 	'''
 
 	omega = 1j*2*np.pi*m/float(L)
@@ -139,16 +139,11 @@ def FFTLog(k, f_k, q, mu, kr=1.0, lowring=False):
 	N = f_k.size
 	delta_L = (np.log(np.max(k))-np.log(np.min(k)))/float(N-1)
 	L = (np.log(np.max(k))-np.log(np.min(k)))
-
-
 	log_k0 = np.log(k[N//2])
 	k0 = np.exp(log_k0)
 
-	# Fourier transform input data and get m values, shifted so the zero point is at the center
-
 	c_m = np.fft.rfft(f_k)
 	m = np.fft.rfftfreq(N, d=1.)*float(N)
-	# make r vector
 	if lowring:
 		kr = _lowring_kr(mu, q, L, N, kr)
 	r0 = kr/k0
@@ -158,20 +153,16 @@ def FFTLog(k, f_k, q, mu, kr=1.0, lowring=False):
 	m_r = np.arange(-N//2, N//2)
 	m_shift = np.fft.fftshift(m_r)
 
-	#s-array
 	s = delta_L*(-m_r)+log_r0
 	id = m_shift
 	r = 10**(s[id]/np.log(10))
 
 	u_m = _u_m_term(m, mu, q, kr, L)
-
 	b = c_m*u_m
 
 	A_m = np.fft.irfft(b)
-
 	A = A_m[id]
 
-	# reverse the order
 	A = A[::-1]
 	r = r[::-1]
 
