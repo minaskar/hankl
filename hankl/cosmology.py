@@ -13,6 +13,7 @@ def P2xi(k, P, l, n=0, lowring=False):
         P (array): Array of respective Power Spectrum values.
         l (int): Degree of Power Spectrum multipole.
         n (int): Order of expansion (Default is 0, plane-parallel).
+        lowring (bool): If True then use low-ringing value of kr (Default is False).
     Returns:
         separation array and correlation function array.
 
@@ -32,6 +33,7 @@ def xi2P(r, xi, l, n=0, lowring=False):
         xi (array): Array of respective two point correlation function values.
         l (int): Degree of Power Spectrum multipole.
         n (int): Order of expansion (Default is 0, plane-parallel).
+        lowring (bool): If True then use low-ringing value of kr (Default is False).
     Returns:
         wavenumber array and power spectrum array.
     '''

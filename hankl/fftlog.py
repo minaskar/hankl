@@ -12,7 +12,7 @@ def _gamma_term(mu, x, cut=200.0):
 
 	Args:
 		mu (float): Index of J_mu in Hankel transform; mu may be any real number, positive or negative.
-		x ():
+		x (float): Argument of function U_{m}(x) of eq.16.
 		cut (float): Cuttoff value to switch to Gamma function limiting case.
 	Returns:
 		Gamma fraction term of eq. 16
@@ -120,15 +120,15 @@ def FFTLog(k, f_k, q, mu, kr=1.0, lowring=False):
 	.. math:: f(r)= \int_0^\infty F(k) (kr)^{-q} J_\mu(kr) r dk
 
 	Args:
-		k (array):
-		f_k (array):
+		k (array): Array of uniformly logarithmically spaced k (or r) values.
+		f_k (array): Array of respective F(k) (or f(r)) values.
 		q (float): Exponent of power law bias; q may be any real number, positive or negative.
 		mu (float): Index of J_mu in Hankel transform; mu may be any real number, positive or negative.
 		kr (float): Input value of kr (Default is 1).
 		lowring (bool): If True, then use low-ringing value of kr closest to input value of kr.
 	Returns:
-		r (array): x
-		A (array): x
+		r (array): Array of uniformly logarithmically spaced r (or k) values.
+		A (array): Array of respective f(r) (or F(k)) values.
 
 	References:
 		[1] J. D. Talman. Numerical Fourier and Bessel Transforms in Logarithmic Variables. Journal of Computational Physics, 29:35-48, October 1978.
