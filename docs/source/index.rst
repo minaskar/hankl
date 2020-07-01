@@ -5,12 +5,19 @@
 
 .. title:: hankl
 
+.. figure:: ./../../logo.png
 
-Welcome to hankl's documentation!
-=================================
+*hankl is a lightweight Python implementation of the FFTLog algorithm for Cosmology*
 
 .. image:: https://img.shields.io/badge/License-GPLv3-blue.svg
     :target: https://github.com/minaskar/zeus/blob/master/LICENSE
+.. image:: https://img.shields.io/badge/GitHub-minaskar%2Fhankl-blue
+    :target: https://github.com/minaskar/hankl
+.. image:: https://api.travis-ci.com/minaskar/hankl.svg?branch=master&status=passed
+    :target: https://travis-ci.com/minaskar/hankl
+.. image:: https://readthedocs.org/projects/hankl/badge/?version=latest
+    :target: https://hankl.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
 
 
 
