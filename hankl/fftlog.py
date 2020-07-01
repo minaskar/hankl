@@ -95,6 +95,29 @@ def u_m_vals(m, mu, q, kr, L):
 
 
 def FFTLog(k, f_k, q, mu, lowring=False):
+	r'''
+	Hankel Transform based on the FFTLog algorithm of [1] and [2].
+
+	Defined as:
+
+	F(k)= \int_0^\infty f(r) (kr)^q J_\mu(kr) k dr 
+	f(r)= \int_0^\infty F(k) (kr)^{-q} J_\mu(kr) r dk
+
+	References
+		[1] J. D. Talman. Numerical Fourier and Bessel Transforms in Logarithmic Variables.
+            Journal of Computational Physics, 29:35-48, October 1978.
+		[2] A. J. S. Hamilton. Uncorrelated modes of the non-linear power spectrum.
+            MNRAS, 312:257-284, February 2000.
+
+	Args:
+		k (array):
+		f_k (array):
+		q (float):
+		mu (float):
+		lowring (bool):
+	Returns:
+		Two arrays
+	'''
 
 	if ((q+mu) < -1):
 		print('Error in reality condition for Bessel function integration.')
