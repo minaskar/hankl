@@ -1,5 +1,7 @@
 hankl/__pycache__/
 dist/
+build/
+hankl.egg-info/
 .vscode/
 .ipynb_checkpoints/
 *.dat

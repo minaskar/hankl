@@ -5,7 +5,7 @@ Example
 For instance, if you wanted to Hankel-transform a 2-point Correlation Function to get the Power Spectrum, you would do something like::
 
     import numpy as np
-    import hankel
+    import hankl
 
     # Create mock 2-point Correlation Function
     r = np.logspace(-3, 3, 100)
