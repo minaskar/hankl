@@ -1,4 +1,5 @@
 hankl/__pycache__/
+dist/
 .vscode/
 .ipynb_checkpoints/
 *.dat
