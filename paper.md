@@ -3,31 +3,33 @@ title: 'hankl: A lightweight Python implementation of the FFTLog algorithm for C
 tags:
   - Python
   - astronomy
-  - dynamics
-  - galactic dynamics
-  - milky way
+  - cosmology
+  - fftlog
+  - numerical intergration
+  - Hankel transform
 authors:
-  - name: Adrian M. Price-Whelan^[Custom footnotes for e.g. denoting who the corresspoinding author is can be included like this.]
-    orcid: 0000-0003-0872-7098
-    affiliation: "1, 2" # (Multiple affiliations must be quoted)
-  - name: Author Without ORCID
-    affiliation: 2
-  - name: Author with no affiliation
-    affiliation: 3
+  - name: Minas Karamanis^[Custom footnotes for e.g. denoting who the corresspoinding author is can be included like this.]
+    orcid: 0000-0001-9489-4612
+    affiliation: 1 # (Multiple affiliations must be quoted)
+  - name: Florian Beutler
+    orcid: 0000-0003-0467-5438
+    affiliation: 1
+  # - name: Author with no affiliation
+  #  affiliation: 3
 affiliations:
- - name: Lyman Spitzer, Jr. Fellow, Princeton University
+ - name: Institute for Astronomy, University of Edinburgh
    index: 1
- - name: Institution Name
-   index: 2
- - name: Independent Researcher
-   index: 3
-date: 13 August 2017
+ #- name: Institution Name
+ #  index: 2
+ #- name: Independent Researcher
+# index: 3
+date: 7 July 2020
 bibliography: paper.bib
 
 # Optional fields if submitting to a AAS journal too, see this blog post:
 # https://blog.joss.theoj.org/2018/12/a-new-collaboration-with-aas-publishing
-aas-doi: 10.3847/xxxxx <- update this with the DOI from AAS once you know it.
-aas-journal: Astrophysical Journal <- The name of the AAS journal.
+#aas-doi: 10.3847/xxxxx <- update this with the DOI from AAS once you know it.
+#aas-journal: Astrophysical Journal <- The name of the AAS journal.
 ---
 
 # Summary
