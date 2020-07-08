@@ -31,11 +31,12 @@ The Hankel transform finds application in a wide range of scientific fields,
 namely cosmology, astrophysics, geophysics, and fluid mechanics.
 
 As an example, in modern cosmology, the large-scale clustering of galaxies in
-the observable universe is often described by means of the 2-point Correlation
-function and the Power Spectrum [@peebles:1980]. Due to the isotropy of the
-universe those two quantities are related by a Hankel transformation. The
-ability to perform such transformations in a fast and accurate manner is of
-paramount importance for studies of the large-scale structure of the universe.
+the observable universe is often described by means of the configuration-space
+2-point Correlation function and its Fourier-space counterpart, the Power
+Spectrum [@peebles:1980]. Due to the statistical isotropy of the universe these
+two quantities are related by a Hankel transformation. The ability to perform
+such transformations in a fast and accurate manner is of paramount importance
+for studies of the large-scale structure of the universe.
 
 However, the implementation of the Hankel transform poses some serious numerical
 challenges. Most importantly, the Bessel function kernel is a highly oscillatory
