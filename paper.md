@@ -41,8 +41,8 @@ for studies of the large-scale structure of the universe.
 However, the implementation of the Hankel transform poses some serious numerical
 challenges. Most importantly, the Bessel function kernel is a highly oscillatory
 function and any naive implementation of the quadrature numerical integration
-methods could lead to inaccurate results. To successfully overcome this issue
-@talman:1978, and later @hamilton:2000, introduced the FFTLog algorithm,
+methods could lead to grossly inaccurate results. To successfully overcome this
+issue @talman:1978, and later @hamilton:2000, introduced the FFTLog algorithm,
 which can be thought of as the Fast Fourier Transform of a logarithmically
 spaced periodic sequence.
 
