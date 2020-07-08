@@ -16,14 +16,31 @@ Read the docs at [hankl.readthedocs.io](https://hankl.readthedocs.io)
 
 ## Installation
 
-To install hankl using pip run
+To install hankl using pip run:
 
 ```bash
 pip install hankl
 ```
+
+Alternatively, install the latest version of hankl from source:
+
+```bash
+git clone https://github.com/minaskar/hankl.git
+cd hankl
+pip install -r requirements.txt
+pip install .
+```
+
+You need numpy and scipy to install hankl.
+
 
 ## Licence
 
 Copyright 2020 Minas Karamanis and contributors.
 
 zeus is free software made available under the GPL-3.0 License. For details see the `LICENSE` file.
+
+
+## Contributions
+
+We welcome all contributions to hankl via Pull Requests. Let us know about any issues or questions about hankl.

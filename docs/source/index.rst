@@ -49,6 +49,11 @@ Changelog
 
 - Initial version release.
 
+Contributions
+=============
+
+We welcome all contributions to hankl via Pull Requests. Let us know about any issues or questions about hankl.
+
 
 .. toctree::
    :maxdepth: 4
