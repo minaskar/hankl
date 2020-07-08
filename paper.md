@@ -14,22 +14,11 @@ authors:
   - name: Florian Beutler
     orcid: 0000-0003-0467-5438
     affiliation: 1
-  # - name: Author with no affiliation
-  #  affiliation: 3
 affiliations:
  - name: Institute for Astronomy, University of Edinburgh
    index: 1
- #- name: Institution Name
- #  index: 2
- #- name: Independent Researcher
-# index: 3
 date: 7 July 2020
 bibliography: paper.bib
-
-# Optional fields if submitting to a AAS journal too, see this blog post:
-# https://blog.joss.theoj.org/2018/12/a-new-collaboration-with-aas-publishing
-#aas-doi: 10.3847/xxxxx <- update this with the DOI from AAS once you know it.
-#aas-journal: Astrophysical Journal <- The name of the AAS journal.
 ---
 
 # Summary
@@ -43,7 +32,7 @@ namely cosmology, astrophysics, geophysics, and fluid mechanics.
 
 As an example, in modern cosmology, the large-scale clustering of galaxies in
 the obserable universe is often described by means of the 2-point Correlation
-function and the Power Spectrum `[@peebles:1980]`. Due to the isotropy of the
+function and the Power Spectrum [@peebles:1980]. Due to the isotropy of the
 universe those two quantities are related by a Hankel transformation. The
 ability to perform such transformations in a fast and accurate manner is of
 paramount importance for studies of the large-scale structure of the universe.
@@ -51,10 +40,10 @@ paramount importance for studies of the large-scale structure of the universe.
 However, the implementation of the Hankel transform poses some serious numerical
 challenges. Most importantly, the Bessel function kernel is a highly oscillatory
 function and any naive implementation of the quadrature numerical integration
-methods could lead to non-accurate results. To successfully overcome this issue
-`@talman:1978`, and later `@hamilton:2000`, introduced the FFTLog algorithm, which
-can be thought of as the Fast Fourier Transform of a logarithmically spaced periodic
-sequence.
+methods could lead to inaccurate results. To successfully overcome this issue
+@talman:1978, and later @hamilton:2000, introduced the FFTLog algorithm,
+which can be thought of as the Fast Fourier Transform of a logarithmically
+spaced periodic sequence.
 
 # Statement of need 
 
@@ -63,9 +52,5 @@ focus on cosmological applications. `hankl` relies on the `NumPy` and `SciPy` li
 in order to provide fast and accurate (to machine precision) Hankel transforms with
 minimal computational overhead. `hankl` is well suited for scientific applications
 that require a dead-simple and modular Python interface along with C-level performance.
-
-# Acknowledgements
-
--
 
 # References
