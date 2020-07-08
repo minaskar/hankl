@@ -8,7 +8,7 @@ tags:
   - numerical intergration
   - Hankel transform
 authors:
-  - name: Minas Karamanis^[minaskar@gmail.com]
+  - name: Minas Karamanis
     orcid: 0000-0001-9489-4612
     affiliation: 1
   - name: Florian Beutler
