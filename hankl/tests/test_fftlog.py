@@ -9,7 +9,7 @@ def f(r, mu=0.0):
 
 
 def g(k, mu=0.0):
-    return k**(mu+1.0) * np.exp(- k**2.0 / 2.0)
+    return k**(mu+1.0) * np.exp(-k**2.0 / 2.0)
 
 
 def test_fftlog(seed=42):
