@@ -38,7 +38,7 @@ You need numpy and scipy to install hankl.
 
 Copyright 2020 Minas Karamanis and contributors.
 
-zeus is free software made available under the GPL-3.0 License. For details see the `LICENSE` file.
+hankl is free software made available under the GPL-3.0 License. For details see the `LICENSE` file.
 
 
 ## Contributions
