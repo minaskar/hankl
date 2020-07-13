@@ -17,7 +17,7 @@ authors:
 affiliations:
  - name: Institute for Astronomy, University of Edinburgh, Royal Observatory, Blackford Hill, Edinburgh EH9 3HJ, UK
    index: 1
-date: 8 July 2020
+date: 13 July 2020
 bibliography: paper.bib
 ---
 
