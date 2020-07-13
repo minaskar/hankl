@@ -50,9 +50,9 @@ spaced periodic sequence.
 
 `hankl` is a lightweight Python implementation of the FFTLog algorithm with
 particular focus on cosmological applications. `hankl` relies on the `NumPy` and
-`SciPy` libraries in order to provide fast and accurate (to machine precision)
-Hankel transforms with minimal computational overhead. `hankl` is well suited
-for scientific applications that require a dead-simple and modular Python
-interface along with C-level performance.
+`SciPy` libraries in order to provide fast and accurate Hankel transforms with
+minimal computational overhead. `hankl` is well suited for scientific
+applications that require a dead-simple and modular Python interface along with
+C-level performance.
 
 # References
