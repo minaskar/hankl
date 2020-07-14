@@ -144,7 +144,7 @@ def FFTLog(k, f_k, q, mu, kr=1.0, lowring=False):
 
 	N = f_k.size
 	delta_L = (np.log(np.max(k))-np.log(np.min(k)))/float(N-1)
-	L = (np.log(np.max(k))-np.log(np.min(k)))
+	L = np.log(np.max(k)) - np.log(np.min(k))
 	log_k0 = np.log(k[N//2])
 	k0 = np.exp(log_k0)
 
