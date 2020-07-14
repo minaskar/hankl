@@ -2,7 +2,7 @@ import numpy as np
 from scipy.special import gamma
 
 
-def _gamma_term(mu, x, cut=200.0):
+def _gamma_term(mu, x, cutoff=200.0):
 	r'''
 	Compute the following term:
 	
@@ -13,7 +13,7 @@ def _gamma_term(mu, x, cut=200.0):
 	Args:
 		mu (float): Index of J_mu in Hankel transform; mu may be any real number, positive or negative.
 		x (float): Argument of function U_{m}(x) of eq.16.
-		cut (float): Cuttoff value to switch to Gamma function limiting case.
+		cutoff (float): Cuttoff value to switch to Gamma function using Stirling's approximation.
 	Returns:
 		Gamma fraction term of eq. 16
 	'''
@@ -22,20 +22,23 @@ def _gamma_term(mu, x, cut=200.0):
 
 	g_m = np.zeros(x.size, dtype=complex)
 
-	asym_x = x[np.absolute(imag_x) > cut]
+	asym_x = x[np.absolute(imag_x) > cutoff]
 	asym_plus = (mu+1+asym_x)/2.
 	asym_minus = (mu+1-asym_x)/2.
 
-	x_good = x[(np.absolute(imag_x) <= cut) & (x != mu + 1 + 0.0j)]
+	x_good = x[(np.absolute(imag_x) <= cutoff) & (x != mu + 1 + 0.0j)]
 
 	alpha_plus = (mu+1+x_good)/2.
 	alpha_minus = (mu+1-x_good)/2.
 
-	g_m[(np.absolute(imag_x) <= cut) & (x != mu + 1 + 0.0j)] = gamma(alpha_plus)/gamma(alpha_minus)
+	g_m[(np.absolute(imag_x) <= cutoff) & (x != mu + 1 + 0.0j)] = gamma(alpha_plus)/gamma(alpha_minus)
 
 	# high-order expansion
-	g_m[np.absolute(imag_x) > cut] = np.exp((asym_plus-0.5)*np.log(asym_plus) - (asym_minus-0.5)*np.log(asym_minus) - asym_x
-                                      + 1./12 * (1./asym_plus - 1./asym_minus) + 1./360.*(1./asym_minus**3 - 1./asym_plus**3) + 1./1260*(1./asym_plus**5 - 1./asym_minus**5))
+	g_m[np.absolute(imag_x) > cutoff] = np.exp((asym_plus-0.5)*np.log(asym_plus) \
+									  - (asym_minus-0.5)*np.log(asym_minus) - asym_x \
+                                      + 1./12 * (1./asym_plus - 1./asym_minus) \
+									  + 1./360.*(1./asym_minus**3 - 1./asym_plus**3) \
+									  + 1./1260*(1./asym_plus**5 - 1./asym_minus**5))
 
 	g_m[np.where(x == mu+1+0.0j)[0]] = 0.+0.0j
 
