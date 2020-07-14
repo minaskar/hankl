@@ -128,7 +128,7 @@ def FFTLog(k, f_k, q, mu, kr=1.0, lowring=False):
 		q (float): Exponent of power law bias; q may be any real number, positive (for forward transform) or negative (for inverse transform).
 		mu (float): Index of J_mu in Hankel transform; mu may be any real number, positive or negative.
 		kr (float): Input value of kr (Default is 1).
-		lowring (bool): If True, then use low-ringing value of kr closest to input value of kr.
+		lowring (bool): If True, then use low-ringing value of kr closest to input value of kr (Default is False).
 	Returns:
 		r (array): Array of uniformly logarithmically spaced r (or k) values.
 		A (array): Array of respective f(r) (or F(k)) values.
