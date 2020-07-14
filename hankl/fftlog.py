@@ -152,7 +152,6 @@ def FFTLog(k, f_k, q, mu, kr=1.0, lowring=False):
 	r0 = kr/k0
 	log_r0 = np.log(r0)
 
-	m = np.fft.rfftfreq(N, d=1.)*float(N)
 	m_r = np.arange(-N//2, N//2)
 	m_shift = np.fft.fftshift(m_r)
 
