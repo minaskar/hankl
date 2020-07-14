@@ -122,7 +122,7 @@ def FFTLog(k, f_k, q, mu, kr=1.0, lowring=False):
 	Args:
 		k (array): Array of uniformly logarithmically spaced k (or r) values.
 		f_k (array): Array of respective F(k) (or f(r)) values.
-		q (float): Exponent of power law bias; q may be any real number, positive or negative.
+		q (float): Exponent of power law bias; q may be any real number, positive (for forward transform) or negative (for inverse transform).
 		mu (float): Index of J_mu in Hankel transform; mu may be any real number, positive or negative.
 		kr (float): Input value of kr (Default is 1).
 		lowring (bool): If True, then use low-ringing value of kr closest to input value of kr.
@@ -135,6 +135,9 @@ def FFTLog(k, f_k, q, mu, kr=1.0, lowring=False):
 		
 		[2] A. J. S. Hamilton. Uncorrelated modes of the non-linear power spectrum. MNRAS, 312:257-284, February 2000.
 	'''
+
+	if mu + 1.0 + q == 0.0:
+		raise ValueError('The FFTLog Hankel Transform is singular when mu + 1 + q = 0.')
 
 	N = f_k.size
 	delta_L = (np.log(np.max(k))-np.log(np.min(k)))/float(N-1)
