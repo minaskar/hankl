@@ -3,6 +3,7 @@ import pytest
 
 import hankl
 
+
 def test_cosmo(seed=42):
     np.random.seed(seed)
     r = np.logspace(-3, 3, 100)
