@@ -11,12 +11,19 @@ def _gamma_term(mu, x, cutoff=200.0):
 
 	(see eq.16 in https://jila.colorado.edu/~ajsh/FFTLog/)
 
-	Args:
-		mu (float): Index of J_mu in Hankel transform; mu may be any real number, positive or negative.
-		x (float): Argument of function U_{m}(x) of eq.16.
-		cutoff (float): Cuttoff value to switch to Gamma function using Stirling's approximation.
-	Returns:
-		Gamma fraction term of eq. 16
+	Parameters
+    ----------
+	mu : float
+        Index of J_mu in Hankel transform; mu may be any real number, positive or negative.
+	x : float
+        Argument of function U_{m}(x) of eq.16.
+	cutoff : float
+        Cuttoff value to switch to Gamma function using Stirling's approximation.
+	
+    Returns
+    -------
+    g_m : array
+	    Gamma fraction term of eq. 16
 	"""
 
     imag_x = np.imag(x)
@@ -57,14 +64,23 @@ def _lowring_xy(mu, q, L, N, xy=1.0):
 
 	is real thus reducing lowringing of the Hankel Transform.
 
-	Args:
-		mu (float): Index of J_mu in Hankel transform; mu may be any real number, positive or negative.
-		q (float): Exponent of power law bias; q may be any real number, positive or negative.
-		L (float): Range of uniformly logarithmically spaced points.
-		N (int): Number of uniformly logarithmically spaced points.
-		xy (float): Input value of xy (Default is 1).
-	Returns:
-		xy (float): Low-ringing value of xy nearest to input xy.
+	Parameters
+    ----------
+	mu : float
+        Index of J_mu in Hankel transform; mu may be any real number, positive or negative.
+	q : float
+        Exponent of power law bias; q may be any real number, positive or negative.
+	L : float
+        Range of uniformly logarithmically spaced points.
+	N : int
+        Number of uniformly logarithmically spaced points.
+	xy : float
+        Input value of xy (Default is 1).
+
+	Returns
+    -------
+	xy : float
+        Low-ringing value of xy nearest to input xy.
 	"""
 
     delta_L = L / float(N)
@@ -93,14 +109,23 @@ def _u_m_term(m, mu, q, xy, L):
 
 	(see eq.18 in https://jila.colorado.edu/~ajsh/FFTLog/)
 
-	Args:
-		m (float): Index of u_{m} term.
-		mu (float): Index of J_mu in Hankel transform; mu may be any real number, positive or negative.
-		q (float):  Exponent of power law bias; q may be any real number, positive or negative.
-		xy (float): Value of xy.
-		L (float): Range of uniformly logarithmically spaced points.
-	Returns:
-		u_{m}(\mu, q) (float) : u_{m} term of eq. 18
+	Parameters
+    ----------
+	m : float)
+        Index of u_{m} term.
+	mu : float)
+        Index of J_mu in Hankel transform; mu may be any real number, positive or negative.
+	q : float)
+        Exponent of power law bias; q may be any real number, positive or negative.
+	xy : float)
+        Value of xy.
+	L : float
+        Range of uniformly logarithmically spaced points.
+	
+    Returns
+    -------
+	u_{m}(\mu, q) : (float)
+        u_{m} term of eq. 18
 	"""
 
     omega = 1j * 2 * np.pi * m / float(L)
@@ -124,30 +149,45 @@ def FFTLog(x, f_x, q, mu, xy=1.0, lowring=False, ext=0, range=None, return_ext=F
 
 		.. math:: f(y)= \int_0^\infty F(x) (xy)^{q} J_\mu(xy) y dx
 
-	Args:
-		x (array): Array of uniformly logarithmically spaced x values.
-		f_x (array): Array of respective F(x) values.
-		q (float): Exponent of power law bias; q may be any real number, positive (for forward transform) or negative (for inverse transform).
-		mu (float): Index of J_mu in Hankel transform; mu may be any real number, positive or negative.
-		xy (float): Input value of xy (Default is 1).
-		lowring (bool): If True, then use low-ringing value of xy closest to input value of xy (Default is False).
-		ext (int or tuple or list): Controls the extrapolation mode. When ext is an integer then the same extrapolation method will
-            be used for both ends of the input array. Alternatively, when ext is an tuple (ext_left, ext_right) or a list [ext_left,
-            ext_right] then different methods can be used for the two ends of the the input array.
+	Parameters
+    ----------
+	x : array
+        Array of uniformly logarithmically spaced x values.
+	f_x : array
+        Array of respective F(x) values.
+	q : float
+        Exponent of power law bias; q may be any real number, positive (for forward transform) or negative (for inverse transform).
+	mu : float
+        Index of J_mu in Hankel transform; mu may be any real number, positive or negative.
+	xy : float
+        Input value of xy (Default is 1).
+	lowring : bool
+        If True, then use low-ringing value of xy closest to input value of xy (Default is False).
+	ext : int or tuple or list
+        Controls the extrapolation mode. When ext is an integer then the same extrapolation method will
+        be used for both ends of the input array. Alternatively, when ext is an tuple (ext_left, ext_right) or a list [ext_left,
+        ext_right] then different methods can be used for the two ends of the the input array.
 
-            * if ext=0 then no extrapolation is performed (Default).
-            * if ext=1 then zero padding is performed.
-            * if ext=2 then constant padding is performed.
-            * if ext=3 then Power-Law extrapolation is performed.
+        * if ext=0 then no extrapolation is performed (Default).
+        * if ext=1 then zero padding is performed.
+        * if ext=2 then constant padding is performed.
+        * if ext=3 then Power-Law extrapolation is performed.
 
-        range (tuple or list): The minimum extrapolation range in the form of a tuple (x_min, x_max) or list [x_min, x_max]. When \
-            range=None (Default) then the extended range is chosen automatically such that its array-size is the next power of two.
-		return_ext (bool): When False (Default) the result is cropped to fit the original x range.
+    range : tuple or list
+        The minimum extrapolation range in the form of a tuple (x_min, x_max) or list [x_min, x_max]. When
+        range=None (Default) then the extended range is chosen automatically such that its array-size is the next power of two.
 
-	Returns:
+	return_ext : bool
+        When False (Default) the result is cropped to fit the original x range.
+
+	Returns
+    -------
+    y, f(y) : array, array
         Array of uniformly logarithmically spaced y values and array of respecive f(y) values.
 
-	References:
+
+	References
+    ----------
 		[1] J. D. Talman. Numerical Fourier and Bessel Transforms in Logarithmic Variables. Journal of Computational Physics, 29:35-48, October 1978.
 		
 		[2] A. J. S. Hamilton. Uncorrelated modes of the non-linear power spectrum. MNRAS, 312:257-284, February 2000.

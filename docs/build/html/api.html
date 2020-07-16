@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>User Guide and API &mdash; hankl 1.0.0 documentation</title>
+  <title>User Guide and API &mdash; hankl 1.1.0 documentation</title>
   
 
   
@@ -175,19 +175,27 @@
 <li><p><strong>l</strong> (<em>int</em>) -- Degree of Power Spectrum multipole.</p></li>
 <li><p><strong>n</strong> (<em>int</em>) -- Order of expansion (Default is 0, plane-parallel).</p></li>
 <li><p><strong>lowring</strong> (<em>bool</em>) -- If True then use low-ringing value of kr (Default is False).</p></li>
-<li><p><strong>ext</strong> (<em>int</em><em> or </em><em>tuple</em><em> or </em><em>list</em>) -- Controls the extrapolation mode. When ext is an integer then the same extrapolation method will
-be used for both ends of the input array. Alternatively, when ext is an tuple (ext_left, ext_right) or a list [ext_left,
-ext_right] then different methods can be used for the two ends of the the input array.
-- if ext=0 then no extrapolation is performed (Default).
-- if ext=1 then zero padding is performed.
-- if ext=2 then constant padding is performed.
-- if ext=3 then Power-Law extrapolation is performed.</p></li>
-<li><p><strong>range</strong> (<em>tuple</em><em> or </em><em>list</em>) -- The minimum extrapolation range in the form of a tuple (k_min, k_max) or list [k_min, k_max]. When range=None (Default) then the extended range is chosen automatically such that its array-size is the next power of two.
-return_ext (bool): When False (Default) the result is cropped to fit the original k range.</p></li>
+<li><p><strong>ext</strong> (<em>int</em><em> or </em><em>tuple</em><em> or </em><em>list</em>) -- <p>Controls the extrapolation mode. When ext is an integer then the same extrapolation method will be used
+for both ends of the input array. Alternatively, when ext is an tuple (ext_left, ext_right) or a list
+[ext_left, ext_right] then different methods can be used for the two ends of the the input array.</p>
+<ul>
+<li><p>if ext=0 then no extrapolation is performed (Default).</p></li>
+<li><p>if ext=1 then zero padding is performed.</p></li>
+<li><p>if ext=2 then constant padding is performed.</p></li>
+<li><p>if ext=3 then Power-Law extrapolation is performed.</p></li>
+</ul>
+</p></li>
+<li><p><strong>range</strong> (<em>tuple</em><em> or </em><em>list</em>) -- The minimum extrapolation range in the form of a tuple (k_min, k_max) or list [k_min, k_max]. When range=None
+(Default) then the extended range is chosen automatically such that its array-size is the next power of two.
+return_ext : bool
+When False (Default) the result is cropped to fit the original k range.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Array of uniformly logarithmically spaced r values and respective array of xi_{l}^{(n)}(r) values.</p>
+<dd class="field-even"><p><strong>r, xi</strong> -- Array of uniformly logarithmically spaced r values and respective array of xi_{l}^{(n)}(r) values.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array, array</p>
 </dd>
 </dl>
 </dd></dl>
@@ -206,18 +214,28 @@ return_ext (bool): When False (Default) the result is cropped to fit the origina
 <li><p><strong>l</strong> (<em>int</em>) -- Degree of Power Spectrum multipole.</p></li>
 <li><p><strong>n</strong> (<em>int</em>) -- Order of expansion (Default is 0, plane-parallel).</p></li>
 <li><p><strong>lowring</strong> (<em>bool</em>) -- If True then use low-ringing value of kr (Default is False).</p></li>
-<li><p><strong>ext</strong> (<em>int</em><em> or </em><em>tuple</em><em> or </em><em>list</em>) -- Controls the extrapolation mode. When ext is an integer then the same extrapolation method will
-be used for both ends of the input array. Alternatively, when ext is an tuple (ext_left, ext_right) or a list [ext_left,
-ext_right] then different methods can be used for the two ends of the the input array. * if ext=0 then no extrapolation is performed (Default).
-- if ext=1 then zero padding is performed.
-- if ext=2 then constant padding is performed.
-- if ext=3 then Power-Law extrapolation is performed.</p></li>
-<li><p><strong>range</strong> (<em>tuple</em><em> or </em><em>list</em>) -- The minimum extrapolation range in the form of a tuple (r_min, r_max) or list [r_min, r_max]. When range=None (Default) then the extended range is chosen automatically such that its array-size is the next power of two.
-return_ext (bool): When False (Default) the result is cropped to fit the original r range.</p></li>
+<li><p><strong>ext</strong> (<em>int</em><em> or </em><em>tuple</em><em> or </em><em>list</em>) -- <p>Controls the extrapolation mode. When ext is an integer then the same extrapolation method will be used
+for both ends of the input array. Alternatively, when ext is an tuple (ext_left, ext_right) or a list
+[ext_left, ext_right] then different methods can be used for the two ends of the the input array.</p>
+<ul>
+<li><p>if ext=0 then no extrapolation is performed (Default).</p></li>
+<li><p>if ext=1 then zero padding is performed.</p></li>
+<li><p>if ext=2 then constant padding is performed.</p></li>
+<li><p>if ext=3 then Power-Law extrapolation is performed.</p></li>
+</ul>
+</p></li>
+<li><p><strong>range</strong> (<em>tuple</em><em> or </em><em>list</em>) -- <p>The minimum extrapolation range in the form of a tuple (k_min, k_max) or list [k_min, k_max]. When range=None (Default)
+then the extended range is chosen automatically such that its array-size is the next power of two.</p>
+<p>return_ext : bool
+When False (Default) the result is cropped to fit the original k range.</p>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Array of uniformly logarithmically spaced k values and array of respective P_{l}^{(n)}(k) values.</p>
+<dd class="field-even"><p><strong>k, P</strong> -- Array of uniformly logarithmically spaced k values and array of respective P_{l}^{(n)}(k) values.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>array, array</p>
 </dd>
 </dl>
 </dd></dl>
@@ -228,37 +246,56 @@ return_ext (bool): When False (Default) the result is cropped to fit the origina
 <dl class="function">
 <dt id="hankl.FFTLog">
 <code class="sig-prename descclassname">hankl.</code><code class="sig-name descname">FFTLog</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">f_x</em>, <em class="sig-param">q</em>, <em class="sig-param">mu</em>, <em class="sig-param">xy=1.0</em>, <em class="sig-param">lowring=False</em>, <em class="sig-param">ext=0</em>, <em class="sig-param">range=None</em>, <em class="sig-param">return_ext=False</em><span class="sig-paren">)</span><a class="headerlink" href="#hankl.FFTLog" title="Permalink to this definition">¶</a></dt>
-<dd><p>Hankel Transform based on the FFTLog algorithm of [1] and [2].</p>
+<dd><blockquote>
+<div><p>Hankel Transform based on the FFTLog algorithm of [1] and [2].</p>
 <p>Defined as:</p>
 <blockquote>
 <div><div class="math notranslate nohighlight">
 \[f(y)= \int_0^\infty F(x) (xy)^{q} J_\mu(xy) y dx\]</div>
 </div></blockquote>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>x</strong> (<em>array</em>) -- Array of uniformly logarithmically spaced x values.</p></li>
-<li><p><strong>f_x</strong> (<em>array</em>) -- Array of respective F(x) values.</p></li>
-<li><p><strong>q</strong> (<em>float</em>) -- Exponent of power law bias; q may be any real number, positive (for forward transform) or negative (for inverse transform).</p></li>
-<li><p><strong>mu</strong> (<em>float</em>) -- Index of J_mu in Hankel transform; mu may be any real number, positive or negative.</p></li>
-<li><p><strong>xy</strong> (<em>float</em>) -- Input value of xy (Default is 1).</p></li>
-<li><p><strong>lowring</strong> (<em>bool</em>) -- If True, then use low-ringing value of xy closest to input value of xy (Default is False).</p></li>
-<li><p><strong>ext</strong> -- Controls the extrapolation mode. When ext is an integer then the same extrapolation method will</p></li>
+<p>Parameters</p>
+</div></blockquote>
+<blockquote>
+<div><p>x : array
+Array of uniformly logarithmically spaced x values.
+f_x : array
+Array of respective F(x) values.
+q : float
+Exponent of power law bias; q may be any real number, positive (for forward transform) or negative (for inverse transform).
+mu : float
+Index of J_mu in Hankel transform; mu may be any real number, positive or negative.
+xy : float
+Input value of xy (Default is 1).
+lowring : bool
+If True, then use low-ringing value of xy closest to input value of xy (Default is False).
+ext : int or tuple or list
+Controls the extrapolation mode. When ext is an integer then the same extrapolation method will
+be used for both ends of the input array. Alternatively, when ext is an tuple (ext_left, ext_right) or a list [ext_left,
+ext_right] then different methods can be used for the two ends of the the input array.</p>
+<ul class="simple">
+<li><p>if ext=0 then no extrapolation is performed (Default).</p></li>
+<li><p>if ext=1 then zero padding is performed.</p></li>
+<li><p>if ext=2 then constant padding is performed.</p></li>
+<li><p>if ext=3 then Power-Law extrapolation is performed.</p></li>
 </ul>
+</div></blockquote>
+<dl>
+<dt>range<span class="classifier">tuple or list</span></dt><dd><p>The minimum extrapolation range in the form of a tuple (x_min, x_max) or list [x_min, x_max]. When
+range=None (Default) then the extended range is chosen automatically such that its array-size is the next power of two.</p>
+<p>return_ext : bool
+When False (Default) the result is cropped to fit the original x range.</p>
+<p>Returns</p>
 </dd>
 </dl>
-<dl class="simple">
-<dt>range (tuple or list): The minimum extrapolation range in the form of a tuple (x_min, x_max) or list [x_min, x_max]. When </dt><dd><dl class="simple">
-<dt>range=None (Default) then the extended range is chosen automatically such that its array-size is the next power of two.</dt><dd><p>return_ext (bool): When False (Default) the result is cropped to fit the original x range.</p>
+<dl>
+<dt>y, f(y)<span class="classifier">array, array</span></dt><dd><p>Array of uniformly logarithmically spaced y values and array of respecive f(y) values.</p>
+<p>References</p>
 </dd>
 </dl>
-</dd>
-</dl>
-<p>Returns:
-Array of uniformly logarithmically spaced y values and array of respecive f(y) values.</p>
-<p class="rubric">References</p>
-<p>[1] J. D. Talman. Numerical Fourier and Bessel Transforms in Logarithmic Variables. Journal of Computational Physics, 29:35-48, October 1978.</p>
+<blockquote>
+<div><p>[1] J. D. Talman. Numerical Fourier and Bessel Transforms in Logarithmic Variables. Journal of Computational Physics, 29:35-48, October 1978.</p>
 <p>[2] A. J. S. Hamilton. Uncorrelated modes of the non-linear power spectrum. MNRAS, 312:257-284, February 2000.</p>
+</div></blockquote>
 </dd></dl>
 
 <div class="toctree-wrapper compound">

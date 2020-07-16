@@ -23,7 +23,7 @@ copyright = "2020, Minas Karamanis"
 author = "Minas Karamanis"
 
 # The full version, including alpha/beta/rc tags
-release = "1.0.0"
+release = "1.1.0"
 
 
 # -- General configuration ---------------------------------------------------
@@ -45,9 +45,9 @@ extensions = [
 
 # Generate the API documentation when building
 autosummary_generate = True
-numpydoc_show_class_members = False
+numpydoc_show_class_members = True
 
-napoleon_google_docstring = True
+napoleon_google_docstring = False
 napoleon_numpy_docstring = True
 napoleon_include_init_with_doc = False
 napoleon_include_private_with_doc = False

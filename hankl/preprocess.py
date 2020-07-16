@@ -5,24 +5,36 @@ def preprocess(x, f, ext=0, range=None):
     r"""
     This is the main preprocessing tool. It's purpose is to zero/constant pad or extrapolate the input arrays in a consistent way.
 
-    Args:
-		x (array): Array of uniformly logarithmically spaced x values.
-		f (array): Array of respective F(x) values.
-        ext (int or tuple or list): Controls the extrapolation mode. When ext is an integer then the same extrapolation method will
-            be used for both ends of the input array. Alternatively, when ext is an tuple (ext_left, ext_right) or a list [ext_left,
-            ext_right] then different methods can be used for the two ends of the the input array.
-            - if ext=0 then no extrapolation is performed (Default).
-            - if ext=1 then zero padding is performed.
-            - if ext=2 then constant padding is performed.
-            - if ext=3 then Power-Law extrapolation is performed.
-        range (tuple or list): The minimum extrapolation range in the form of a tuple (x_min, x_max) or list [x_min, x_max]. When
-            range=None (Default) then the extended range is chosen automatically such that its array-size is the next power of two.
+    Parameters
+    ----------
+	x : array
+        Array of uniformly logarithmically spaced x values.
+	f : array
+        Array of respective F(x) values.
+    ext : int or tuple or list
+        Controls the extrapolation mode. When ext is an integer then the same extrapolation method will
+        be used for both ends of the input array. Alternatively, when ext is an tuple (ext_left, ext_right) or a list [ext_left,
+        ext_right] then different methods can be used for the two ends of the the input array.
 
-    Returns:
-        x (array): Extended range.
-        f (array): Extrapolated input array.
-        N_left (int): Number of array elements that were added to the left of the initial x range.
-        N_right (int): Number of array elements that were added to the right of the initial x range.
+        * if ext=0 then no extrapolation is performed (Default).
+        * if ext=1 then zero padding is performed.
+        * if ext=2 then constant padding is performed.
+        * if ext=3 then Power-Law extrapolation is performed.
+
+    range : tuple or list
+        The minimum extrapolation range in the form of a tuple (x_min, x_max) or list [x_min, x_max]. When
+        range=None (Default) then the extended range is chosen automatically such that its array-size is the next power of two.
+
+    Returns
+    -------
+    x : array
+        Extended range.
+    f : array
+        Extrapolated input array.
+    N_left : int
+        Number of array elements that were added to the left of the initial x range.
+    N_right : int
+        Number of array elements that were added to the right of the initial x range.
     """
 
     if range is not None:
@@ -82,27 +94,42 @@ def padding(x, f, ext_left=0, ext_right=0, n_ext=0):
     r"""
     This function extends the input arrays until they reach the next-power-of-two size array.
 
-    Args:
-		x (array): Array of uniformly logarithmically spaced x values.
-		f (array): Array of respective F(x) values.
-        ext_left (int): Controls the extrapolation mode for the left segment:
-            - if ext=0 then no extrapolation is performed (Default).
-            - if ext=1 then zero padding is performed.
-            - if ext=2 then constant padding is performed.
-            - if ext=3 then Power-Law extrapolation is performed.
-        ext_right (int): Controls the extrapolation mode for the right segment:
-            - if ext=0 then no extrapolation is performed (Default).
-            - if ext=1 then zero padding is performed.
-            - if ext=2 then constant padding is performed.
-            - if ext=3 then Power-Law extrapolation is performed.
-        n_ext (int): When n_ext=0 (Default) then the input array is extended until it reaches the next power of two size.
-            When n_ext=1 then the input array is extended until is reaches the next power of two but one and so on. 
+    Parameters
+    ----------
+	x : array
+        Array of uniformly logarithmically spaced x values.
+	f : array
+        Array of respective F(x) values.
+    ext_left : int
+        Controls the extrapolation mode for the left segment:
 
-    Returns:
-        x (array): Extended range.
-        f (array): Extrapolated input array.
-        N_left (int): Number of array elements that were added to the left of the initial x range.
-        N_right (int): Number of array elements that were added to the right of the initial x range.
+        * if ext=0 then no extrapolation is performed (Default).
+        * if ext=1 then zero padding is performed.
+        * if ext=2 then constant padding is performed.
+        * if ext=3 then Power-Law extrapolation is performed.
+
+    ext_right : int
+        Controls the extrapolation mode for the right segment:
+
+        * if ext=0 then no extrapolation is performed (Default).
+        * if ext=1 then zero padding is performed.
+        * if ext=2 then constant padding is performed.
+        * if ext=3 then Power-Law extrapolation is performed.
+
+    n_ext : int
+        When n_ext=0 (Default) then the input array is extended until it reaches the next power of two size.
+        When n_ext=1 then the input array is extended until is reaches the next power of two but one and so on. 
+
+    Returns
+    -------
+    x : array
+        Extended range.
+    f : array
+        Extrapolated input array.
+    N_left : int
+        Number of array elements that were added to the left of the initial x range.
+    N_right : int
+        Number of array elements that were added to the right of the initial x range.
     """
 
     N = x.size
