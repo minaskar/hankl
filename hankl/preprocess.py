@@ -2,6 +2,9 @@ import numpy as np
 
 
 def preprocess(x, f, ext=0, range=None):
+    r'''
+    This is the main preprocessing tool. It's purpose to zero/constant pad or extrapolate the in[ut arrays in a consistent way.
+    '''
 
     if range is not None:
         try:
