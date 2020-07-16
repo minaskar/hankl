@@ -24,6 +24,7 @@ def P2xi(k, P, l, n=0, lowring=False, ext=0, range=None, return_ext=False):
         range (tuple or list): The minimum extrapolation range in the form of a tuple (k_min, k_max) or list [k_min, k_max]. When
             range=None (Default) then the extended range is chosen automatically such that its array-size is the next power of two.
 		return_ext (bool): When False (Default) the result is cropped to fit the original k range.
+
     Returns:
         separation array and correlation function array.
 
@@ -54,6 +55,7 @@ def xi2P(r, xi, l, n=0, lowring=False, ext=0, range=None, return_ext=False):
         range (tuple or list): The minimum extrapolation range in the form of a tuple (r_min, r_max) or list [r_min, r_max]. When
             range=None (Default) then the extended range is chosen automatically such that its array-size is the next power of two.
 		return_ext (bool): When False (Default) the result is cropped to fit the original r range.
+        
     Returns:
         wavenumber array and power spectrum array.
     '''
