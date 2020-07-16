@@ -2,7 +2,7 @@ import numpy as np
 from .fftlog import FFTLog
 
 
-def P2xi(k, P, l, n=0, lowring=False):
+def P2xi(k, P, l, n=0, lowring=False, ext=0, range=None, return_ext=False):
     r'''
     Hankel Transform Power Spectrum Multipole to Correlation Function Multipole.
 
@@ -18,11 +18,11 @@ def P2xi(k, P, l, n=0, lowring=False):
         separation array and correlation function array.
 
     '''
-    r, f = FFTLog(k, P*k**1.5, q=-n, mu=l+0.5, lowring=lowring)
+    r, f = FFTLog(k, P*k**1.5, q=-n, mu=l+0.5, lowring=lowring, ext=ext, range=range, return_ext=return_ext)
     return r, f * (2.0*np.pi)**(-1.5) * r**(-1.5) * (1j)**l
 
 
-def xi2P(r, xi, l, n=0, lowring=False):
+def xi2P(r, xi, l, n=0, lowring=False, ext=0, range=None, return_ext=False):
     r'''
     Hankel Transform Correlation Function Multipole to Power Spectrum Multipole.
 
@@ -37,6 +37,6 @@ def xi2P(r, xi, l, n=0, lowring=False):
     Returns:
         wavenumber array and power spectrum array.
     '''
-    k, F = FFTLog(r, xi*r**1.5, q=n, mu=l+0.5, lowring=lowring)
+    k, F = FFTLog(r, xi*r**1.5, q=n, mu=l+0.5, lowring=lowring, ext=ext, range=range, return_ext=return_ext)
     return k, F * (2.0*np.pi)**1.5 * k**(-1.5) * (-1j)**l
  
