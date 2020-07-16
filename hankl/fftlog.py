@@ -1,5 +1,6 @@
 import numpy as np
 from scipy.special import gamma
+from .preprocess import preprocess
 
 
 def _gamma_term(mu, x, cutoff=200.0):
@@ -112,7 +113,7 @@ def _u_m_term(m, mu, q, xy, L):
 	return u_m
 
 
-def FFTLog(x, f_x, q, mu, xy=1.0, lowring=False, ext=0, range=None):
+def FFTLog(x, f_x, q, mu, xy=1.0, lowring=False, ext=0, range=None, return_ext=False):
 	r'''
 	Hankel Transform based on the FFTLog algorithm of [1] and [2].
 
@@ -136,6 +137,7 @@ def FFTLog(x, f_x, q, mu, xy=1.0, lowring=False, ext=0, range=None):
             - if ext=3 then Power-Law extrapolation is performed.
         range (tuple or list): The minimum extrapolation range in the form of a tuple (x_min, x_max) or list [x_min, x_max]. When
             range=None (Default) then the extended range is chosen automatically such that its array-size is the next power of two.
+		return_ext (bool): When False (Default) the result is cropped to fit the original x range.
 	Returns:
 		y (array): Array of uniformly logarithmically spaced y values.
 		f_y (array): Array of respective f(y) values.
@@ -148,6 +150,8 @@ def FFTLog(x, f_x, q, mu, xy=1.0, lowring=False, ext=0, range=None):
 
 	if mu + 1.0 + q == 0.0:
 		raise ValueError('The FFTLog Hankel Transform is singular when mu + 1 + q = 0.')
+
+	x, f_x, N_left, N_right = preprocess(x, f_x, ext=ext, range=range)
 
 	N = f_x.size
 	delta_L = (np.log(np.max(x))-np.log(np.min(x)))/float(N-1)
@@ -181,6 +185,9 @@ def FFTLog(x, f_x, q, mu, xy=1.0, lowring=False, ext=0, range=None):
 	if (q != 0):
 		f_y = f_y*(y)**(-float(q))
 
-	return y, f_y
+	if return_ext:
+		return y, f_y
+	else:
+		return y[N_left:-np.maximum(N_right, 1)], f_y[N_left:-np.maximum(N_right, 1)]
 
 
