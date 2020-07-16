@@ -142,8 +142,7 @@ def _u_m_term(m, mu, q, xy, L):
 
 
 def FFTLog(x, f_x, q, mu, xy=1.0, lowring=False, ext=0, range=None, return_ext=False):
-    r"""
-	Hankel Transform based on the FFTLog algorithm of [1] and [2].
+    r"""Hankel Transform based on the FFTLog algorithm of [1] and [2].
 
 	Defined as:
 
@@ -191,6 +190,7 @@ def FFTLog(x, f_x, q, mu, xy=1.0, lowring=False, ext=0, range=None, return_ext=F
 		[1] J. D. Talman. Numerical Fourier and Bessel Transforms in Logarithmic Variables. Journal of Computational Physics, 29:35-48, October 1978.
 		
 		[2] A. J. S. Hamilton. Uncorrelated modes of the non-linear power spectrum. MNRAS, 312:257-284, February 2000.
+        
 	"""
 
     if mu + 1.0 + q == 0.0:
