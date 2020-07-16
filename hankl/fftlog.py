@@ -112,7 +112,7 @@ def _u_m_term(m, mu, q, xy, L):
 	return u_m
 
 
-def FFTLog(x, f_x, q, mu, xy=1.0, lowring=False):
+def FFTLog(x, f_x, q, mu, xy=1.0, lowring=False, ext=0, range=None):
 	r'''
 	Hankel Transform based on the FFTLog algorithm of [1] and [2].
 
@@ -127,6 +127,15 @@ def FFTLog(x, f_x, q, mu, xy=1.0, lowring=False):
 		mu (float): Index of J_mu in Hankel transform; mu may be any real number, positive or negative.
 		xy (float): Input value of xy (Default is 1).
 		lowring (bool): If True, then use low-ringing value of xy closest to input value of xy (Default is False).
+		ext (int or tuple or list): Controls the extrapolation mode. When ext is an integer then the same extrapolation method will
+            be used for both ends of the input array. Alternatively, when ext is an tuple (ext_left, ext_right) or a list [ext_left,
+            ext_right] then different methods can be used for the two ends of the the input array.
+            - if ext=0 then no extrapolation is performed (Default).
+            - if ext=1 then zero padding is performed.
+            - if ext=2 then constant padding is performed.
+            - if ext=3 then Power-Law extrapolation is performed.
+        range (tuple or list): The minimum extrapolation range in the form of a tuple (x_min, x_max) or list [x_min, x_max]. When
+            range=None (Default) then the extended range is chosen automatically such that its array-size is the next power of two.
 	Returns:
 		y (array): Array of uniformly logarithmically spaced y values.
 		f_y (array): Array of respective f(y) values.
