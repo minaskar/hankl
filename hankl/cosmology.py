@@ -25,7 +25,8 @@ def P2xi(k, P, l, n=0, lowring=False, ext=0, range=None, return_ext=False):
 		return_ext (bool): When False (Default) the result is cropped to fit the original k range.
 
     Returns:
-        separation array and correlation function array.
+        r (array): Array of uniformly logarithmically spaced r values.
+		xi (array): Array of respective xi_{l}^{(n)}(r) values.
 
     """
     r, f = FFTLog(
@@ -64,7 +65,8 @@ def xi2P(r, xi, l, n=0, lowring=False, ext=0, range=None, return_ext=False):
 		return_ext (bool): When False (Default) the result is cropped to fit the original r range.
         
     Returns:
-        wavenumber array and power spectrum array.
+        k (array): Array of uniformly logarithmically spaced k values.
+		P (array): Array of respective P_{l}^{(n)}(k) values.
     """
     k, F = FFTLog(
         r,
