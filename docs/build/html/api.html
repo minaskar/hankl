@@ -163,7 +163,7 @@
 <h2>Cosmology module<a class="headerlink" href="#cosmology-module" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="hankl.P2xi">
-<code class="sig-prename descclassname">hankl.</code><code class="sig-name descname">P2xi</code><span class="sig-paren">(</span><em class="sig-param">k</em>, <em class="sig-param">P</em>, <em class="sig-param">l</em>, <em class="sig-param">n=0</em>, <em class="sig-param">lowring=False</em><span class="sig-paren">)</span><a class="headerlink" href="#hankl.P2xi" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">hankl.</code><code class="sig-name descname">P2xi</code><span class="sig-paren">(</span><em class="sig-param">k</em>, <em class="sig-param">P</em>, <em class="sig-param">l</em>, <em class="sig-param">n=0</em>, <em class="sig-param">lowring=False</em>, <em class="sig-param">ext=0</em>, <em class="sig-param">range=None</em>, <em class="sig-param">return_ext=False</em><span class="sig-paren">)</span><a class="headerlink" href="#hankl.P2xi" title="Permalink to this definition">¶</a></dt>
 <dd><p>Hankel Transform Power Spectrum Multipole to Correlation Function Multipole.</p>
 <div class="math notranslate nohighlight">
 \[\xi_{l}^{(n)}(r) = i^{l} \int_{0}^{\infty} k^{2} dk / (2 \pi^{2}) (kr)^{-n} P_{l}^{(n)}(k) j_{l}(ks)\]</div>
@@ -175,6 +175,19 @@
 <li><p><strong>l</strong> (<em>int</em>) -- Degree of Power Spectrum multipole.</p></li>
 <li><p><strong>n</strong> (<em>int</em>) -- Order of expansion (Default is 0, plane-parallel).</p></li>
 <li><p><strong>lowring</strong> (<em>bool</em>) -- If True then use low-ringing value of kr (Default is False).</p></li>
+<li><p><strong>ext</strong> (<em>int</em><em> or </em><em>tuple</em><em> or </em><em>list</em>) -- Controls the extrapolation mode. When ext is an integer then the same extrapolation method will
+be used for both ends of the input array. Alternatively, when ext is an tuple (ext_left, ext_right) or a list [ext_left,
+ext_right] then different methods can be used for the two ends of the the input array.
+- if ext=0 then no extrapolation is performed (Default).
+- if ext=1 then zero padding is performed.
+- if ext=2 then constant padding is performed.
+- if ext=3 then Power-Law extrapolation is performed.</p></li>
+<li><p><strong>range</strong> (<em>tuple</em><em> or </em><em>list</em>) -- <p>The minimum extrapolation range in the form of a tuple (k_min, k_max) or list [k_min, k_max]. When
+range=None (Default) then the extended range is chosen automatically such that its array-size is the next power of two.</p>
+<blockquote>
+<div><p>return_ext (bool): When False (Default) the result is cropped to fit the original k range.</p>
+</div></blockquote>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -185,7 +198,7 @@
 
 <dl class="function">
 <dt id="hankl.xi2P">
-<code class="sig-prename descclassname">hankl.</code><code class="sig-name descname">xi2P</code><span class="sig-paren">(</span><em class="sig-param">r</em>, <em class="sig-param">xi</em>, <em class="sig-param">l</em>, <em class="sig-param">n=0</em>, <em class="sig-param">lowring=False</em><span class="sig-paren">)</span><a class="headerlink" href="#hankl.xi2P" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">hankl.</code><code class="sig-name descname">xi2P</code><span class="sig-paren">(</span><em class="sig-param">r</em>, <em class="sig-param">xi</em>, <em class="sig-param">l</em>, <em class="sig-param">n=0</em>, <em class="sig-param">lowring=False</em>, <em class="sig-param">ext=0</em>, <em class="sig-param">range=None</em>, <em class="sig-param">return_ext=False</em><span class="sig-paren">)</span><a class="headerlink" href="#hankl.xi2P" title="Permalink to this definition">¶</a></dt>
 <dd><p>Hankel Transform Correlation Function Multipole to Power Spectrum Multipole.</p>
 <div class="math notranslate nohighlight">
 \[P_{l}^{(n)}(k) = 4 \pi (-i)^{l} \int_{0}^{\infty} r^{2} dr (kr)^{n} \xi_{l}^{(n)}(r) j_{l}(kr)\]</div>
@@ -197,6 +210,19 @@
 <li><p><strong>l</strong> (<em>int</em>) -- Degree of Power Spectrum multipole.</p></li>
 <li><p><strong>n</strong> (<em>int</em>) -- Order of expansion (Default is 0, plane-parallel).</p></li>
 <li><p><strong>lowring</strong> (<em>bool</em>) -- If True then use low-ringing value of kr (Default is False).</p></li>
+<li><p><strong>ext</strong> (<em>int</em><em> or </em><em>tuple</em><em> or </em><em>list</em>) -- Controls the extrapolation mode. When ext is an integer then the same extrapolation method will
+be used for both ends of the input array. Alternatively, when ext is an tuple (ext_left, ext_right) or a list [ext_left,
+ext_right] then different methods can be used for the two ends of the the input array.
+- if ext=0 then no extrapolation is performed (Default).
+- if ext=1 then zero padding is performed.
+- if ext=2 then constant padding is performed.
+- if ext=3 then Power-Law extrapolation is performed.</p></li>
+<li><p><strong>range</strong> (<em>tuple</em><em> or </em><em>list</em>) -- <p>The minimum extrapolation range in the form of a tuple (r_min, r_max) or list [r_min, r_max]. When
+range=None (Default) then the extended range is chosen automatically such that its array-size is the next power of two.</p>
+<blockquote>
+<div><p>return_ext (bool): When False (Default) the result is cropped to fit the original r range.</p>
+</div></blockquote>
+</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -210,30 +236,38 @@
 <h2>General FFTLog module<a class="headerlink" href="#general-fftlog-module" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
 <dt id="hankl.FFTLog">
-<code class="sig-prename descclassname">hankl.</code><code class="sig-name descname">FFTLog</code><span class="sig-paren">(</span><em class="sig-param">k</em>, <em class="sig-param">f_k</em>, <em class="sig-param">q</em>, <em class="sig-param">mu</em>, <em class="sig-param">kr=1.0</em>, <em class="sig-param">lowring=False</em><span class="sig-paren">)</span><a class="headerlink" href="#hankl.FFTLog" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">hankl.</code><code class="sig-name descname">FFTLog</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">f_x</em>, <em class="sig-param">q</em>, <em class="sig-param">mu</em>, <em class="sig-param">xy=1.0</em>, <em class="sig-param">lowring=False</em>, <em class="sig-param">ext=0</em>, <em class="sig-param">range=None</em>, <em class="sig-param">return_ext=False</em><span class="sig-paren">)</span><a class="headerlink" href="#hankl.FFTLog" title="Permalink to this definition">¶</a></dt>
 <dd><p>Hankel Transform based on the FFTLog algorithm of [1] and [2].</p>
 <p>Defined as:</p>
 <div class="math notranslate nohighlight">
-\[F(k)= \int_0^\infty f(r) (kr)^q J_\mu(kr) k dr\]</div>
-<div class="math notranslate nohighlight">
-\[f(r)= \int_0^\infty F(k) (kr)^{-q} J_\mu(kr) r dk\]</div>
+\[f(y)= \int_0^\infty F(x) (xy)^{q} J_\mu(xy) y dx\]</div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>k</strong> (<em>array</em>) -- Array of uniformly logarithmically spaced k (or r) values.</p></li>
-<li><p><strong>f_k</strong> (<em>array</em>) -- Array of respective F(k) (or f(r)) values.</p></li>
-<li><p><strong>q</strong> (<em>float</em>) -- Exponent of power law bias; q may be any real number, positive or negative.</p></li>
+<li><p><strong>x</strong> (<em>array</em>) -- Array of uniformly logarithmically spaced x values.</p></li>
+<li><p><strong>f_x</strong> (<em>array</em>) -- Array of respective F(x) values.</p></li>
+<li><p><strong>q</strong> (<em>float</em>) -- Exponent of power law bias; q may be any real number, positive (for forward transform) or negative (for inverse transform).</p></li>
 <li><p><strong>mu</strong> (<em>float</em>) -- Index of J_mu in Hankel transform; mu may be any real number, positive or negative.</p></li>
-<li><p><strong>kr</strong> (<em>float</em>) -- Input value of kr (Default is 1).</p></li>
-<li><p><strong>lowring</strong> (<em>bool</em>) -- If True, then use low-ringing value of kr closest to input value of kr.</p></li>
+<li><p><strong>xy</strong> (<em>float</em>) -- Input value of xy (Default is 1).</p></li>
+<li><p><strong>lowring</strong> (<em>bool</em>) -- If True, then use low-ringing value of xy closest to input value of xy (Default is False).</p></li>
+<li><p><strong>ext</strong> -- Controls the extrapolation mode. When ext is an integer then the same extrapolation method will</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Array of uniformly logarithmically spaced r (or k) values.
-A (array): Array of respective f(r) (or F(k)) values.</p>
+</dl>
+<dl class="simple">
+<dt>range (tuple or list): The minimum extrapolation range in the form of a tuple (x_min, x_max) or list [x_min, x_max]. When</dt><dd><dl class="simple">
+<dt>range=None (Default) then the extended range is chosen automatically such that its array-size is the next power of two.</dt><dd><p>return_ext (bool): When False (Default) the result is cropped to fit the original x range.</p>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>r (array)</p>
+</dl>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Array of uniformly logarithmically spaced y values.
+f_y (array): Array of respective f(y) values.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>y (array)</p>
 </dd>
 </dl>
 <p class="rubric">References</p>

@@ -59,4 +59,3 @@ def xi2P(r, xi, l, n=0, lowring=False, ext=0, range=None, return_ext=False):
     '''
     k, F = FFTLog(r, xi*r**1.5, q=n, mu=l+0.5, lowring=lowring, ext=ext, range=range, return_ext=return_ext)
     return k, F * (2.0*np.pi)**1.5 * k**(-1.5) * (-1j)**l
- 
