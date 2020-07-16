@@ -25,9 +25,7 @@ def P2xi(k, P, l, n=0, lowring=False, ext=0, range=None, return_ext=False):
 		return_ext (bool): When False (Default) the result is cropped to fit the original k range.
 
     Returns:
-        r (array): Array of uniformly logarithmically spaced r values.
-		xi (array): Array of respective xi_{l}^{(n)}(r) values.
-
+        Array of uniformly logarithmically spaced r values and respective array of xi_{l}^{(n)}(r) values.
     """
     r, f = FFTLog(
         k,
@@ -56,8 +54,8 @@ def xi2P(r, xi, l, n=0, lowring=False, ext=0, range=None, return_ext=False):
         lowring (bool): If True then use low-ringing value of kr (Default is False).
         ext (int or tuple or list): Controls the extrapolation mode. When ext is an integer then the same extrapolation method will
             be used for both ends of the input array. Alternatively, when ext is an tuple (ext_left, ext_right) or a list [ext_left,
-            ext_right] then different methods can be used for the two ends of the the input array.
-            - if ext=0 then no extrapolation is performed (Default).
+            ext_right] then different methods can be used for the two ends of the the input array. \
+            * if ext=0 then no extrapolation is performed (Default).
             - if ext=1 then zero padding is performed.
             - if ext=2 then constant padding is performed.
             - if ext=3 then Power-Law extrapolation is performed.
@@ -65,8 +63,7 @@ def xi2P(r, xi, l, n=0, lowring=False, ext=0, range=None, return_ext=False):
 		return_ext (bool): When False (Default) the result is cropped to fit the original r range.
         
     Returns:
-        k (array): Array of uniformly logarithmically spaced k values.
-		P (array): Array of respective P_{l}^{(n)}(k) values.
+        Array of uniformly logarithmically spaced k values and array of respective P_{l}^{(n)}(k) values.
     """
     k, F = FFTLog(
         r,

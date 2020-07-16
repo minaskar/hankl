@@ -187,14 +187,7 @@ return_ext (bool): When False (Default) the result is cropped to fit the origina
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>Array of uniformly logarithmically spaced r values.</dt><dd><p>xi (array): Array of respective xi_{l}^{(n)}(r) values.</p>
-</dd>
-</dl>
-</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>r (array)</p>
+<dd class="field-even"><p>Array of uniformly logarithmically spaced r values and respective array of xi_{l}^{(n)}(r) values.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -215,8 +208,7 @@ return_ext (bool): When False (Default) the result is cropped to fit the origina
 <li><p><strong>lowring</strong> (<em>bool</em>) -- If True then use low-ringing value of kr (Default is False).</p></li>
 <li><p><strong>ext</strong> (<em>int</em><em> or </em><em>tuple</em><em> or </em><em>list</em>) -- Controls the extrapolation mode. When ext is an integer then the same extrapolation method will
 be used for both ends of the input array. Alternatively, when ext is an tuple (ext_left, ext_right) or a list [ext_left,
-ext_right] then different methods can be used for the two ends of the the input array.
-- if ext=0 then no extrapolation is performed (Default).
+ext_right] then different methods can be used for the two ends of the the input array. * if ext=0 then no extrapolation is performed (Default).
 - if ext=1 then zero padding is performed.
 - if ext=2 then constant padding is performed.
 - if ext=3 then Power-Law extrapolation is performed.</p></li>
@@ -225,14 +217,7 @@ return_ext (bool): When False (Default) the result is cropped to fit the origina
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
-<dd class="field-even"><p><dl class="simple">
-<dt>Array of uniformly logarithmically spaced k values.</dt><dd><p>P (array): Array of respective P_{l}^{(n)}(k) values.</p>
-</dd>
-</dl>
-</p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>k (array)</p>
+<dd class="field-even"><p>Array of uniformly logarithmically spaced k values and array of respective P_{l}^{(n)}(k) values.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -258,7 +243,7 @@ return_ext (bool): When False (Default) the result is cropped to fit the origina
 <li><p><strong>mu</strong> (<em>float</em>) -- Index of J_mu in Hankel transform; mu may be any real number, positive or negative.</p></li>
 <li><p><strong>xy</strong> (<em>float</em>) -- Input value of xy (Default is 1).</p></li>
 <li><p><strong>lowring</strong> (<em>bool</em>) -- If True, then use low-ringing value of xy closest to input value of xy (Default is False).</p></li>
-<li><p><strong>ext</strong> -- Controls the extrapolation mode. When ext is an integer then the same extrapolation method will </p></li>
+<li><p><strong>ext</strong> -- Controls the extrapolation mode. When ext is an integer then the same extrapolation method will</p></li>
 </ul>
 </dd>
 </dl>
@@ -269,11 +254,8 @@ return_ext (bool): When False (Default) the result is cropped to fit the origina
 </dl>
 </dd>
 </dl>
-<p>This function returns:</p>
-<ul class="simple">
-<li><p>y: Array of uniformly logarithmically spaced y values.</p></li>
-<li><p>f_y: Array of respective f(y) values.</p></li>
-</ul>
+<p>Returns:
+Array of uniformly logarithmically spaced y values and array of respecive f(y) values.</p>
 <p class="rubric">References</p>
 <p>[1] J. D. Talman. Numerical Fourier and Bessel Transforms in Logarithmic Variables. Journal of Computational Physics, 29:35-48, October 1978.</p>
 <p>[2] A. J. S. Hamilton. Uncorrelated modes of the non-linear power spectrum. MNRAS, 312:257-284, February 2000.</p>
