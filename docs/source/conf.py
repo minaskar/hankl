@@ -38,7 +38,7 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx.ext.mathjax",
     "sphinx.ext.napoleon",
-    "numpydoc",
+    #"numpydoc",
     #'nbsphinx',
     "sphinx.ext.coverage",
     "IPython.sphinxext.ipython_console_highlighting",
