@@ -3,7 +3,7 @@ import numpy as np
 
 def preprocess(x, f, ext=0, range=None):
     r'''
-    This is the main preprocessing tool. It's purpose to zero/constant pad or extrapolate the input arrays in a consistent way.
+    This is the main preprocessing tool. It's purpose is to zero/constant pad or extrapolate the input arrays in a consistent way.
     '''
 
     if range is not None:
@@ -55,6 +55,10 @@ def preprocess(x, f, ext=0, range=None):
 
 
 def padding(x, f, ext_left=0, ext_right=0, n_ext=0):
+    r'''
+    This function extends the input arrays until they reach the next-power-of-two size array.
+
+    '''
 
     N = x.size
     if N < 2:
