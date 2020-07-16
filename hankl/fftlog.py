@@ -146,9 +146,10 @@ def FFTLog(x, f_x, q, mu, xy=1.0, lowring=False, ext=0, range=None, return_ext=F
             range=None (Default) then the extended range is chosen automatically such that its array-size is the next power of two.
 		return_ext (bool): When False (Default) the result is cropped to fit the original x range.
 
-	Returns:
-		y (array): Array of uniformly logarithmically spaced y values.
-		f_y (array): Array of respective f(y) values.
+	This function returns:
+
+	* y: Array of uniformly logarithmically spaced y values.
+	* f_y: Array of respective f(y) values.
 
 	References:
 		[1] J. D. Talman. Numerical Fourier and Bessel Transforms in Logarithmic Variables. Journal of Computational Physics, 29:35-48, October 1978.
