@@ -188,6 +188,9 @@ def FFTLog(x, f_x, q, mu, xy=1.0, lowring=False, ext=0, range=None, return_ext=F
 	if return_ext:
 		return y, f_y
 	else:
-		return y[N_left:-np.maximum(N_right, 1)], f_y[N_left:-np.maximum(N_right, 1)]
+		if N_right == 0:
+			return y[N_left:], f_y[N_left:]
+		else:
+			return y[N_left:-N_right], f_y[N_left:-N_right]
 
 
