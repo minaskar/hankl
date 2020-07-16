@@ -124,7 +124,7 @@ def FFTLog(x, f_x, q, mu, xy=1.0, lowring=False, ext=0, range=None, return_ext=F
 
 	Defined as:
 
-	.. math:: f(y)= \int_0^\infty F(x) (xy)^{q} J_\mu(xy) y dx
+		.. math:: f(y)= \int_0^\infty F(x) (xy)^{q} J_\mu(xy) y dx
 
 	Args:
 		x (array): Array of uniformly logarithmically spaced x values.

@@ -182,12 +182,8 @@ ext_right] then different methods can be used for the two ends of the the input 
 - if ext=1 then zero padding is performed.
 - if ext=2 then constant padding is performed.
 - if ext=3 then Power-Law extrapolation is performed.</p></li>
-<li><p><strong>range</strong> (<em>tuple</em><em> or </em><em>list</em>) -- <p>The minimum extrapolation range in the form of a tuple (k_min, k_max) or list [k_min, k_max]. When
-range=None (Default) then the extended range is chosen automatically such that its array-size is the next power of two.</p>
-<blockquote>
-<div><p>return_ext (bool): When False (Default) the result is cropped to fit the original k range.</p>
-</div></blockquote>
-</p></li>
+<li><p><strong>range</strong> (<em>tuple</em><em> or </em><em>list</em>) -- The minimum extrapolation range in the form of a tuple (k_min, k_max) or list [k_min, k_max]. When range=None (Default) then the extended range is chosen automatically such that its array-size is the next power of two.
+return_ext (bool): When False (Default) the result is cropped to fit the original k range.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -217,12 +213,8 @@ ext_right] then different methods can be used for the two ends of the the input 
 - if ext=1 then zero padding is performed.
 - if ext=2 then constant padding is performed.
 - if ext=3 then Power-Law extrapolation is performed.</p></li>
-<li><p><strong>range</strong> (<em>tuple</em><em> or </em><em>list</em>) -- <p>The minimum extrapolation range in the form of a tuple (r_min, r_max) or list [r_min, r_max]. When
-range=None (Default) then the extended range is chosen automatically such that its array-size is the next power of two.</p>
-<blockquote>
-<div><p>return_ext (bool): When False (Default) the result is cropped to fit the original r range.</p>
-</div></blockquote>
-</p></li>
+<li><p><strong>range</strong> (<em>tuple</em><em> or </em><em>list</em>) -- The minimum extrapolation range in the form of a tuple (r_min, r_max) or list [r_min, r_max]. When range=None (Default) then the extended range is chosen automatically such that its array-size is the next power of two.
+return_ext (bool): When False (Default) the result is cropped to fit the original r range.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
@@ -239,8 +231,10 @@ range=None (Default) then the extended range is chosen automatically such that i
 <code class="sig-prename descclassname">hankl.</code><code class="sig-name descname">FFTLog</code><span class="sig-paren">(</span><em class="sig-param">x</em>, <em class="sig-param">f_x</em>, <em class="sig-param">q</em>, <em class="sig-param">mu</em>, <em class="sig-param">xy=1.0</em>, <em class="sig-param">lowring=False</em>, <em class="sig-param">ext=0</em>, <em class="sig-param">range=None</em>, <em class="sig-param">return_ext=False</em><span class="sig-paren">)</span><a class="headerlink" href="#hankl.FFTLog" title="Permalink to this definition">¶</a></dt>
 <dd><p>Hankel Transform based on the FFTLog algorithm of [1] and [2].</p>
 <p>Defined as:</p>
-<div class="math notranslate nohighlight">
+<blockquote>
+<div><div class="math notranslate nohighlight">
 \[f(y)= \int_0^\infty F(x) (xy)^{q} J_\mu(xy) y dx\]</div>
+</div></blockquote>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">

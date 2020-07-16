@@ -21,8 +21,7 @@ def P2xi(k, P, l, n=0, lowring=False, ext=0, range=None, return_ext=False):
             - if ext=1 then zero padding is performed.
             - if ext=2 then constant padding is performed.
             - if ext=3 then Power-Law extrapolation is performed.
-        range (tuple or list): The minimum extrapolation range in the form of a tuple (k_min, k_max) or list [k_min, k_max]. When
-            range=None (Default) then the extended range is chosen automatically such that its array-size is the next power of two.
+        range (tuple or list): The minimum extrapolation range in the form of a tuple (k_min, k_max) or list [k_min, k_max]. When range=None (Default) then the extended range is chosen automatically such that its array-size is the next power of two.
 		return_ext (bool): When False (Default) the result is cropped to fit the original k range.
 
     Returns:
@@ -61,8 +60,7 @@ def xi2P(r, xi, l, n=0, lowring=False, ext=0, range=None, return_ext=False):
             - if ext=1 then zero padding is performed.
             - if ext=2 then constant padding is performed.
             - if ext=3 then Power-Law extrapolation is performed.
-        range (tuple or list): The minimum extrapolation range in the form of a tuple (r_min, r_max) or list [r_min, r_max]. When
-            range=None (Default) then the extended range is chosen automatically such that its array-size is the next power of two.
+        range (tuple or list): The minimum extrapolation range in the form of a tuple (r_min, r_max) or list [r_min, r_max]. When range=None (Default) then the extended range is chosen automatically such that its array-size is the next power of two.
 		return_ext (bool): When False (Default) the result is cropped to fit the original r range.
         
     Returns:
