@@ -146,23 +146,24 @@ def FFTLog(x, f_x, q, mu, xy=1.0, lowring=False, ext=0, range=None, return_ext=F
 
 	Defined as:
 
-		.. math:: f(y)= \int_0^\infty F(x) (xy)^{q} J_\mu(xy) y dx
+	    .. math:: f(y)= \int_0^\infty F(x) (xy)^{q} J_\mu(xy) y dx
 
-	Parameters
+
+    Parameters
     ----------
-	x : array
+    x : array
         Array of uniformly logarithmically spaced x values.
-	f_x : array
+    f_x : array
         Array of respective F(x) values.
-	q : float
+    q : float
         Exponent of power law bias; q may be any real number, positive (for forward transform) or negative (for inverse transform).
-	mu : float
+    mu : float
         Index of J_mu in Hankel transform; mu may be any real number, positive or negative.
-	xy : float
+    xy : float
         Input value of xy (Default is 1).
-	lowring : bool
+    lowring : bool
         If True, then use low-ringing value of xy closest to input value of xy (Default is False).
-	ext : int or tuple or list
+    ext : int or tuple or list
         Controls the extrapolation mode. When ext is an integer then the same extrapolation method will
         be used for both ends of the input array. Alternatively, when ext is an tuple (ext_left, ext_right) or a list [ext_left,
         ext_right] then different methods can be used for the two ends of the the input array.
@@ -171,26 +172,22 @@ def FFTLog(x, f_x, q, mu, xy=1.0, lowring=False, ext=0, range=None, return_ext=F
         * if ext=1 then zero padding is performed.
         * if ext=2 then constant padding is performed.
         * if ext=3 then Power-Law extrapolation is performed.
-
     range : tuple or list
-        The minimum extrapolation range in the form of a tuple (x_min, x_max) or list [x_min, x_max]. When
-        range=None (Default) then the extended range is chosen automatically such that its array-size is the next power of two.
-
-	return_ext : bool
+        The minimum extrapolation range in the form of a tuple (x_min, x_max) or list [x_min, x_max]. When range=None (Default) then the extended range is chosen automatically such that its array-size is the next power of two.
+    return_ext : bool
         When False (Default) the result is cropped to fit the original x range.
 
-	Returns
+    Returns
     -------
     y, f(y) : array, array
         Array of uniformly logarithmically spaced y values and array of respecive f(y) values.
 
 
-	References
+    References
     ----------
-		[1] J. D. Talman. Numerical Fourier and Bessel Transforms in Logarithmic Variables. Journal of Computational Physics, 29:35-48, October 1978.
+        [1] J. D. Talman. Numerical Fourier and Bessel Transforms in Logarithmic Variables. Journal of Computational Physics, 29:35-48, October 1978.
 		
-		[2] A. J. S. Hamilton. Uncorrelated modes of the non-linear power spectrum. MNRAS, 312:257-284, February 2000.
-        
+        [2] A. J. S. Hamilton. Uncorrelated modes of the non-linear power spectrum. MNRAS, 312:257-284, February 2000.
 	"""
 
     if mu + 1.0 + q == 0.0:
