@@ -55,4 +55,7 @@ minimal computational overhead. `hankl` is well suited for scientific
 applications that require a dead-simple and modular Python interface along with
 C-level performance.
 
+![](hankl_test.png)
+*image_caption*
+
 # References
