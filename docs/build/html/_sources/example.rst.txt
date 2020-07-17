@@ -1,6 +1,6 @@
-=======
-Example
-=======
+========
+Examples
+========
 
 For instance, if you wanted to Hankel-transform a 2-point Correlation Function to get the Power Spectrum, you would do something like::
 

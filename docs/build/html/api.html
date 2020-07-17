@@ -37,7 +37,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Example" href="example.html" />
+    <link rel="next" title="Examples" href="examples.html" />
     <link rel="prev" title="Installation" href="install.html" /> 
 </head>
 
@@ -87,13 +87,14 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">User Guide and API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#hankel-transformations-and-fftlog">Hankel Transformations and FFTLog</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#cosmology-module">Cosmology module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#general-fftlog-module">General FFTLog module</a><ul class="simple">
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="example.html">Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">Examples</a></li>
 </ul>
 
             
@@ -159,6 +160,23 @@
             
   <div class="section" id="user-guide-and-api">
 <h1>User Guide and API<a class="headerlink" href="#user-guide-and-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="hankel-transformations-and-fftlog">
+<h2>Hankel Transformations and FFTLog<a class="headerlink" href="#hankel-transformations-and-fftlog" title="Permalink to this headline">¶</a></h2>
+<p>The FFTLog algorithm can be thought of as the Fast Fourier Transform (FFT) of a logarithmically spaced
+periodic sequence  (= Hankel Transform).</p>
+<p><strong>hankl</strong> consists of two modules, the General FFTLog module and the Cosmology one. The latter is suited
+for modern cosmological application and relies heavily on the former to perform the Hankel transforms.</p>
+<p>The user can find more information about the FFTLog algorithm <a class="reference external" href="https://jila.colorado.edu/~ajsh/FFTLog/">here</a> .</p>
+<p>Here we will provide some usefull suggestions:</p>
+<ul class="simple">
+<li><p>Accuracy of the method usually improves as the range of integration is enlarged. FFTlog prefers an interval that spans many orders of magnitude.</p></li>
+<li><p>Resulution is important. Low resolution will introduce sharp features which in turn will cause ringing.</p></li>
+<li><p>When possible, use the provided preprocessing tools to zero/constant pad or extrapolate the function along a larger interval.</p></li>
+<li><p>FFTLog works better when the input arrays have size that is a power of 2. You can easily manage this by enabling extrapolation (ext).</p></li>
+<li><p>Use the lowringing value of kr (or xy).</p></li>
+</ul>
+<p>For more information about how to use <strong>hankl</strong> see the API below and visit the <a class="reference internal" href="examples.html"><span class="doc">Examples</span></a> page.</p>
+</div>
 <div class="section" id="cosmology-module">
 <h2>Cosmology module<a class="headerlink" href="#cosmology-module" title="Permalink to this headline">¶</a></h2>
 <dl class="function">
@@ -301,7 +319,7 @@ ext_right] then different methods can be used for the two ends of the the input 
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="example.html" class="btn btn-neutral float-right" title="Example" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="examples.html" class="btn btn-neutral float-right" title="Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="install.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

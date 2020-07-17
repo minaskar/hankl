@@ -26,7 +26,7 @@ Getting Started
 ===============
 - See the :doc:`install` page for instruction on how to easily install hankl.
 - See the :doc:`api` page for detailed User Manual and API documentation.
-- See the :doc:`example` page for a simple example.
+- See the :doc:`examples` page for a simple example.
 
 
 Attribution
@@ -45,6 +45,10 @@ hankl is free software made available under the GPL-3.0 License.
 Changelog
 =========
 
+**1.1.0 (17/07/20)**
+
+- Added preprocessing and extrapolation tools.
+
 **1.0.0 (01/07/20)**
 
 - Initial version release.
@@ -62,4 +66,4 @@ We welcome all contributions to hankl via Pull Requests. Let us know about any i
 
    install
    api
-   example
+   examples
