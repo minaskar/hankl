@@ -26,7 +26,7 @@ Getting Started
 ===============
 - See the :doc:`install` page for instruction on how to easily install hankl.
 - See the :doc:`api` page for detailed User Manual and API documentation.
-- See the :doc:`examples` page for a simple example.
+- See the :doc:`examples` page for a couple simple examples.
 
 
 Attribution

@@ -83,31 +83,98 @@ Finally, we can plot the results::
 
 .. figure:: hankl_test.png
 
-We can further impove the performace of **hankl** by enabling the 'lowring' option, extrapolating or zero/constant padding the function (See the API for more information).
+We can further impove the performace of **hankl** by enabling the 'lowring' option, extrapolating or
+zero/constant padding the function (See the API for more information).
 
 
 Cosmology Example
 -----------------
 
-For instance, if you wanted to Hankel-transform a 2-point Correlation Function to get the Power Spectrum, you would do something like::
+In this example we will start from a model of the Galaxy Power Spectrum and our goal is to transform it
+to Configuration space to get the respective model for the Galaxy 2-Point Correlation Function. Furthermore,
+we want to transform both the Monopole and the Quadrupole of the Power Spectrum.
 
-    import numpy as np
+Let's start by importing all the required packages; we will use *classylss* to get the *Linear Matter Power Spectrum*::
+
     import hankl
+    import numpy as np
+    import matplotlib.pyplot as plt
+    import classylss
+    import classylss.binding as CLASS
 
-    # Create mock 2-point Correlation Function
-    r = np.logspace(-3, 3, 100)
-    xi = 1.0 / (1.0 + r * r) ** 1.5
+Now that we have imported everything we need let's initialize the fiducial Cosmology of our model::
+    
+    engine = CLASS.ClassEngine({'H0':70, 'Omega_m':0.31})
+    bg = CLASS.Background(engine)
+    cosmo = CLASS.ClassEngine({'output': 'dTk vTk mPk', 'non linear': 'halofit', 'P_k_max_h/Mpc' : 20., "z_max_pk" : 100.0})
+    sp = CLASS.Spectra(cosmo)
 
-    # Hankel-transform it to get the Power Spectrum
-    k, P = hankl.xi2P(r, xi, l=0)
+The next step is to define a suitable *k range* and get the model for the *Linear Matter Power Spectrum*::
 
-    # Hankel-transform the Power Spectrum back to Configuration Space
-    r_new, xi_new = hankl.P2xi(k, P, l=0)
+    k = np.logspace(-4, 1, 2**10)
+    pk_lin = sp.get_pklin(k=k, z=0.5)
 
-    # Check results
-    np.allclose(r, r_new)
-    np.allclose(xi, xi_new)
+where we also needed to specify the effective redshift *z=0.5*. We can plot easily the Linear Power Spectrum::
 
+    plt.loglog(k, pk_lin)
+    plt.xlabel(r'$k\: [h\; Mpc^{-1}]$')
+    plt.ylabel(r'$P_{linear}(k)\: [h^{-1}\; Mpc]^{3}$')
+    plt.show()
+
+.. figure:: lin_power.png
+
+Now, this was the linear Matter Power Spectrum, to get the Galaxy Power Spectrum multipoles we will use *Kaiser*'s formula:
+
+    .. math:: P(k, \mu) = (b + f \mu^{2})^{2} P_{lin}(k)
+
+where :math:`b` is the *linear bias parameter*, :math:`f` is the *logarithmic growth rate*, and :math:`\mu` is the cosine of the
+angle between teh Fourier modes and the line-of-sight. By decomposing the aforementioned function in terms of the *Legendre polynomials*
+we get the Monopole :math:`(l=0)`, Quadrupole :math:`(l=2)` and Hexadecapole :math:`(l=4)` of the galaxy Power Spectrum::
+
+    def get_multipoles(b, f):
+
+        p0 = (b*b + 2.0 * b *f / 3.0 + f*f/5.0 ) * pk_lin
+
+        p2 = (4.0*b*f/3.0 + 4.0*f*f/7.0) * pk_lin
+
+        p4 = (8.0* f*f / 35.0) * pk_lin
+
+    return p0, p2, p4
+
+Alright, let's compute and plot those multipoles for two realistic values of *b* and *f*::
+
+    P0, P2, P4 = get_multipoles(b=2.0, f=0.5)
+
+    plt.semilogx(k, k * P0, label=r'$P_{0}$')
+    plt.semilogx(k, k * P2, label=r'$P_{2}$')
+    plt.semilogx(k, k * P4, label=r'$P_{4}$')
+    plt.xlabel(r'$k \: [h\: Mpc^{-1}]$')
+    plt.ylabel(r'$k\; P_{l}(k) \: [h^{-1}\: Mpc]^{2}$')
+    plt.xlim(1e-3, 10)
+    plt.legend()
+    plt.show()
+
+.. figure:: linear_model.png
+
+The last step involves using the Cosmology module P2xi to transform the above power spectrum multipoles
+to correlation function multipoles and plot them. Since the Hexadecapole (l=4) is almost zero, we will
+do the transform only for the Monopole and Quadrupole::
+
+    s, xi0 = hankl.P2xi(k, P0, l=0)
+    s, xi2 = hankl.P2xi(k, P2, l=2)
+
+    plt.plot(s, s*s*xi0, label=r'$s^{2}\xi_{0}$')
+    plt.plot(s, s*s*xi2, label=r'$s^{2}\xi_{2}$')
+    plt.xlim(20,180)
+    plt.ylim(-80,130)
+    plt.xlabel(r'$s\: (Mpc/h)$')
+    plt.ylabel(r'$s^{2} \xi_{l}$')
+    plt.legend()
+    plt.show()
+
+.. figure:: corr.png
+
+As expected we can see the Baryon Acoustic Oscillations (BAO) peak in both multipoles.
 
 .. toctree::
    :maxdepth: 4
