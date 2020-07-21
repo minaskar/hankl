@@ -60,4 +60,8 @@ Figure 1 is a demonstration of a Hankel Transformation performed with `hankl` [@
 ![](hankl_test.png)
 **Figure 1:** *g(k) (right panel) is the Hankel Transform of f(r) (left panel).*
 
+# Acknowledgements
+
+FB is funded by RS.
+
 # References
