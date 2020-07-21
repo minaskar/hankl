@@ -62,6 +62,6 @@ Figure 1 is a demonstration of a Hankel Transformation performed with `hankl` [@
 
 # Acknowledgements
 
-FB is funded by RS.
+FB is a Royal Society University Research Fellow.
 
 # References
