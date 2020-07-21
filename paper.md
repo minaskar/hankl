@@ -55,9 +55,9 @@ minimal computational overhead. `hankl` is well suited for scientific
 applications that require a dead-simple and modular Python interface along with
 C-level performance.
 
-Figure 1 is a demonstration of a Hankel Transformation performed with `hankl`.
+Figure 1 is a demonstration of a Hankel Transformation performed with `hankl` [@docs:2020].
 
 ![](hankl_test.png)
-**Figure 1:** *g(k) (right panel) is the Hankel Transform of f(r) (left panel)*
+**Figure 1:** *g(k) (right panel) is the Hankel Transform of f(r) (left panel).*
 
 # References
