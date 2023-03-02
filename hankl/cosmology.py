@@ -2,7 +2,7 @@ import numpy as np
 from .fftlog import FFTLog
 
 
-def P2xi(k, P, l, n=0, lowring=False, ext=0, range=None, return_ext=False):
+def P2xi(k, P, l, n=0, lowring=False, ext=0, range=None, return_ext=False, stirling_cutoff=200.0):
     r"""
     Hankel Transform Power Spectrum Multipole to Correlation Function Multipole.
 
@@ -34,6 +34,8 @@ def P2xi(k, P, l, n=0, lowring=False, ext=0, range=None, return_ext=False):
         (Default) then the extended range is chosen automatically such that its array-size is the next power of two.
     return_ext : bool
         When False (Default) the result is cropped to fit the original k range.
+    stirling_cutoff : float
+        Cutoff threshold, above which the Stirling approximation is used to compute the Gamma function ratio (Default is 200).
 
     Returns
     -------
@@ -49,11 +51,12 @@ def P2xi(k, P, l, n=0, lowring=False, ext=0, range=None, return_ext=False):
         ext=ext,
         range=range,
         return_ext=return_ext,
+        stirling_cutoff=stirling_cutoff,
     )
     return r, f * (2.0 * np.pi) ** (-1.5) * r ** (-1.5) * (1j) ** l
 
 
-def xi2P(r, xi, l, n=0, lowring=False, ext=0, range=None, return_ext=False):
+def xi2P(r, xi, l, n=0, lowring=False, ext=0, range=None, return_ext=False, stirling_cutoff=200.0):
     r"""
     Hankel Transform Correlation Function Multipole to Power Spectrum Multipole.
 
@@ -85,7 +88,8 @@ def xi2P(r, xi, l, n=0, lowring=False, ext=0, range=None, return_ext=False):
         then the extended range is chosen automatically such that its array-size is the next power of two.
     return_ext : bool
         When False (Default) the result is cropped to fit the original k range.
-        
+    stirling_cutoff : float
+        Cutoff threshold, above which the Stirling approximation is used to compute the Gamma function ratio (Default is 200).
 
     Returns
     -------
@@ -101,5 +105,6 @@ def xi2P(r, xi, l, n=0, lowring=False, ext=0, range=None, return_ext=False):
         ext=ext,
         range=range,
         return_ext=return_ext,
+        stirling_cutoff=stirling_cutoff,
     )
     return k, F * (2.0 * np.pi) ** 1.5 * k ** (-1.5) * (-1j) ** l

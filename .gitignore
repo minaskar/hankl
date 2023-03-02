@@ -6,3 +6,4 @@ hankl.egg-info/
 .ipynb_checkpoints/
 *.dat
 *.ipynb
+docs/build/

@@ -9,7 +9,7 @@ def _gamma_term(mu, x, cutoff=200.0):
 	
 		\Gamma[(\mu + 1 + x) / 2] / \Gamma[(\mu + 1 - x) / 2]
 
-	(see eq.16 in https://jila.colorado.edu/~ajsh/FFTLog/)
+	(see eq.16 in https://jila.colorado.edu/~ajsh/FFTLog/ or https://jila.colorado.edu/~ajsh/FFTLog/fftlog.pdf)
 
 	Parameters
     ----------
@@ -101,7 +101,7 @@ def _lowring_xy(mu, q, L, N, xy=1.0):
     return xy
 
 
-def _u_m_term(m, mu, q, xy, L):
+def _u_m_term(m, mu, q, xy, L, cutoff=200.0):
     r"""
 	Compute u_{m}(\mu, q) term defined as
 
@@ -132,7 +132,7 @@ def _u_m_term(m, mu, q, xy, L):
 
     x = q + omega
 
-    U_mu = 2 ** x * _gamma_term(mu, x)
+    U_mu = 2 ** x * _gamma_term(mu, x, cutoff)
 
     u_m = (xy) ** (-omega) * U_mu
 
@@ -141,7 +141,7 @@ def _u_m_term(m, mu, q, xy, L):
     return u_m
 
 
-def FFTLog(x, f_x, q, mu, xy=1.0, lowring=False, ext=0, range=None, return_ext=False):
+def FFTLog(x, f_x, q, mu, xy=1.0, lowring=False, ext=0, range=None, return_ext=False, stirling_cutoff=200.0):
     r"""Hankel Transform based on the FFTLog algorithm of [1] and [2].
 
 	Defined as:
@@ -176,6 +176,8 @@ def FFTLog(x, f_x, q, mu, xy=1.0, lowring=False, ext=0, range=None, return_ext=F
         The minimum extrapolation range in the form of a tuple (x_min, x_max) or list [x_min, x_max]. When range=None (Default) then the extended range is chosen automatically such that its array-size is the next power of two.
     return_ext : bool
         When False (Default) the result is cropped to fit the original x range.
+    stirling_cutoff : float
+        Cutoff threshold, above which the Stirling approximation is used to compute the Gamma function ratio (Default is 200).
 
     Returns
     -------
@@ -215,7 +217,7 @@ def FFTLog(x, f_x, q, mu, xy=1.0, lowring=False, ext=0, range=None, return_ext=F
     id = m_shift
     y = 10 ** (s[id] / np.log(10))
 
-    u_m = _u_m_term(m, mu, q, xy, L)
+    u_m = _u_m_term(m, mu, q, xy, L, stirling_cutoff)
     b = c_m * u_m
 
     A_m = np.fft.irfft(b)

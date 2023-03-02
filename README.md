@@ -33,10 +33,23 @@ pip install .
 
 You need numpy and scipy to install hankl.
 
+## Attribution
+
+Please cite [arXiv:2106.06331](https://arxiv.org/abs/2106.06331) if you find this code useful in your research:
+
+```bash
+@article{karamanis2021hankl,
+  title={hankl: A lightweight Python implementation of the FFTLog algorithm for Cosmology},
+  author={Karamanis, Minas and Beutler, Florian},
+  journal={arXiv preprint arXiv:2106.06331},
+  year={2021}
+}
+```
+
 
 ## Licence
 
-Copyright 2020 Minas Karamanis and contributors.
+Copyright 2020-now Minas Karamanis and contributors.
 
 hankl is free software made available under the GPL-3.0 License. For details see the `LICENSE` file.
 
